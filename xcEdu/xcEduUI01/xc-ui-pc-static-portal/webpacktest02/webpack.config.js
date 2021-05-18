@@ -6,6 +6,7 @@ module.exports={
         path : __dirname+'/dist',  // 注意：__dirname表示webpack.config.js所在目录的绝对路径
         filename:'build.js'		   //输出文件
     },
+    devtool: 'eval-source-map',
     plugins:[
         new htmlwp({
             title: '首页',  //生成的页面标题<head><title>首页</title></head>
