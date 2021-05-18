@@ -9,6 +9,7 @@
 <div id="app">
     <!--{{name}}-->
     <!--v-bind只能把数据对象绑定在dom对象任意属性中，不能双向绑定-->
+    <!--<a v-bind:href="url">可缩写为<a :href="url">-->
     <a v-bind:href="url">
         <!--解决插值表达式闪烁使用v-text-->
         <span v-text="name"></span>

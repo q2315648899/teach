@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue.js常用指令的测试</title>
+</head>
+<body>
+<div id="app">
+    <!--相当于MVVM的view视图-->
+    <ul>
+        <!--只显示偶数行-->
+        <li v-for="(item,index) in list" :key="index" v-if="index % 2==0">{{index}}-{{item}}
+        <!--对json对象的遍历-->
+        <li v-for="(value,key) in user">{{key}}-{{value}}
+        <li v-for="(item,index) in userlist" :key="item.user.uname">
+        <div v-if="item.user.uname=='lisi'" style="background: chartreuse"><!‐‐名称为heima的加背景色‐‐>
+            {{index}}-{{item.user.uname}}-{{item.user.age}}
+        </div>
+        <div v-else="">
+            {{index}}-{{item.user.uname}}-{{item.user.age}}
+        </div>
+        </li>
+    </ul>
+</div>
+</body>
+<script src="/js/vue/vue.min.js"></script>
+<script>
+    // 编写MVVM中的model部分以及VM(ViewModel)部分
+    // 实例化Vue对象
+    //vm :叫做MVVM中的 View Model
+    var VM = new Vue({
+        el:"#app",//表示当前vue对象接管app的div区域
+        data:{
+            // 相当于是MVVM中的Model这个角色
+            list:[1,2,3,4,5],
+            user:{uname:'itcast',age:10},
+            userlist:[
+                {user:{uname:'zhangsan',age:10}},
+                {user:{uname:'lisi',age:11}}
+            ]
+        }
+    });
+</script>
+</html>
