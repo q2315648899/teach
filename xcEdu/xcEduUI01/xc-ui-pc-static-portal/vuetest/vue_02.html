@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>vue.js常用指令的测试</title>
-    <script src="/js/vue/vue.min.js"></script>
 </head>
 <body>
 <!--实现在body区域显示一个传智播客名称-->
 <div id="app">
-    {{name}}
+    <!--{{name}}-->
+    <!--解决插值表达式闪烁使用v-text-->
+    <span v-text="name"></span>
     <input type="text" v-model="num1"/>+
     <input type="text" v-model="num2"/>=
-    {{Number.parseInt(num1)+Number.parseInt(num2)}}
+    <span v-text="Number.parseInt(num1)+Number.parseInt(num2)"></span>
+    <!--{{Number.parseInt(num1)+Number.parseInt(num2)}}-->
     <button>计算</button>
 </div>
 </body>
+<script src="/js/vue/vue.min.js"></script>
 <script>
     // 编写MVVM中的model部分以及VM(ViewModel)部分
     // 实例化Vue对象
