@@ -38,52 +38,18 @@
   export default {
     data() {
       return {
-        list: [{
-          "siteId": "5a751fab6abb5044e0d19ea1",
-          "pageId": "5a754adf6abb500ad05688d9",
-          "pageName": "index.html",
-          "pageAliase": "首页",
-          "pageWebPath": "/index.html",
-          "pageParameter": null,
-          "pagePhysicalPath": "F:\\develop\\xc_portal_static\\",
-          "pageType": "0",
-          "pageTemplate": null,
-          "pageHtml": null,
-          "pageStatus": null,
-          "pageCreateTime": "2018-02-03T05:37:53.256+0000",
-          "templateId": "5a962b52b00ffc514038faf7",
-          "pageParams": null,
-          "htmlFileId": "5a7c1c54d019f14d90a1fb23",
-          "dataUrl": null
-        },
-          {
-            "siteId": "5a751fab6abb5044e0d19ea1",
-            "pageId": "5a795ac7dd573c04508f3a56",
-            "pageName": "index_banner.html",
-            "pageAliase": "轮播图",
-            "pageWebPath": "/include/index_banner.html",
-            "pageParameter": null,
-            "pagePhysicalPath": "F:\\develop\\xc_portal_static\\include\\",
-            "pageType": "0",
-            "pageTemplate": null,
-            "pageHtml": null,
-            "pageStatus": null,
-            "pageCreateTime": "2018-02-06T07:34:21.255+0000",
-            "templateId": "5a962bf8b00ffc514038fafa",
-            "pageParams": null,
-            "htmlFileId": "5a795bbcdd573c04508f3a59",
-            "dataUrl": null
-          }],
-        total: 50,
+        list: [],
+        total: 0,
         params: {
-          page: 2,// 页码
+          page: 1,// 页码
           size: 10// 每页显示个数
         }
       }
     },
     methods: {
       // 分页查询
-      changePage: function () {
+      changePage: function (page) {
+        this.params.page = page;
         // 调用query方法
         this.query();
       },
