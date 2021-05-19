@@ -90,6 +90,7 @@
         })
       }
     },
+    // 钩子方法
     created() {
       // 从url路由中获取页码和站点id并赋值给数据模型对象，从而实现页面回显
       this.params.page = Number.parseInt(this.$route.query.page||1);

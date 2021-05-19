@@ -47,7 +47,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" @click="addSubmit">提交</el-button>
-      <el-button type="primary" @click="go_back" >返回</el-button>
+      <el-button type="primary" @click="go_back">返回</el-button>
     </div>
 
   </div>
@@ -73,10 +73,10 @@
           pageCreateTime: new Date()
         },
         pageFormRules: {
-          siteId:[
+          siteId: [
             {required: true, message: '请选择站点', trigger: 'blur'}
           ],
-          templateId:[
+          templateId: [
             {required: true, message: '请选择模版', trigger: 'blur'}
           ],
           pageName: [
@@ -94,8 +94,26 @@
     methods: {
       addSubmit: function () {
         this.$refs.pageForm.validate((valid) => {
-          if (valid) {
-            alert('提交');
+          if (valid) {// 表单校验成功
+            // 加一个确认提示
+            this.$confirm('确认提交吗？', '提示', {}).then(() => {
+              // 调用page_add方法请求服务端的新增页面接口
+              cmsApi.page_add(this.pageForm).then((res) => {
+                // 解析服务端响应内容
+                if (res.success) {
+                  /*this.$message({
+                    message: '提交成功',
+                    type: 'success'
+                  })*/
+                  this.$message.success("提交成功");
+                  //将表单内容清空
+                  //this.$refs['pageForm']等效于this.$refs.pageForm
+                  this.$refs['pageForm'].resetFields();
+                } else {
+                  this.$message.error('提交失败');
+                }
+              })
+            });
           } else {
             // alert('校验失败');
             return false;
@@ -106,7 +124,7 @@
         this.$router.push({// this是当前vue实例，$router得到当前路由，push设置当前路由
           path: '/cms/page/list', query: {
             page: this.$route.query.page,// this.$route.query 表示取出路由上的参数列表
-            siteId:this.$route.query.siteId
+            siteId: this.$route.query.siteId
           }
         })
       }
