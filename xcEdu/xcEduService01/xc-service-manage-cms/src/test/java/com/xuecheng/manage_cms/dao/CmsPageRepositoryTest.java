@@ -62,7 +62,7 @@ public class CmsPageRepositoryTest {
 //        exampleMatcher = exampleMatcher.withMatcher("pageAliase", ExampleMatcher.GenericPropertyMatchers.contains());
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withMatcher("pageAliase", ExampleMatcher.GenericPropertyMatchers.contains());
-//        页面别名模糊查询，需要自定义字符串的匹配器实现模糊查询
+        // 页面别名模糊查询，需要自定义字符串的匹配器实现模糊查询
 //        ExampleMatcher.GenericPropertyMatchers.contains()包含关键字
 //        ExampleMatcher.GenericPropertyMatchers.exact()精准匹配
         // 定义Example
