@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 /**
  * Create by wong on 2021/5/17
  */
@@ -23,8 +25,9 @@ public class PageService {
 
     /**
      * 页面查询方法
-     * @param page 页码，从1开始数
-     * @param size 每页记录数
+     *
+     * @param page             页码，从1开始数
+     * @param size             每页记录数
      * @param queryPageRequest 查询条件
      * @return
      */
@@ -55,7 +58,7 @@ public class PageService {
         if (page <= 0) {
             page = 1;
         }
-        page = page -1;
+        page = page - 1;
         if (size <= 0) {
             size = 10;
         }
@@ -83,5 +86,45 @@ public class PageService {
 
         // 添加失败
         return new CmsPageResult(CommonCode.FAIL, null);
+    }
+
+    // 根据页面id查询页面信息
+    public CmsPage getById(String id) {
+        Optional<CmsPage> optional = cmsPageRepository.findById(id);
+        if (optional.isPresent()) {
+            CmsPage cmsPage = optional.get();
+            return cmsPage;
+        }
+        return null;
+    }
+
+    // 更新页面信息
+    public CmsPageResult update(String id, CmsPage cmsPage) {
+        //根据id查询页面信息
+        CmsPage one = this.getById(id);
+        if (one != null) {
+            //更新模板id
+            one.setTemplateId(cmsPage.getTemplateId());
+            //更新所属站点
+            one.setSiteId(cmsPage.getSiteId());
+            //更新页面别名
+            one.setPageAliase(cmsPage.getPageAliase());
+            //更新页面名称
+            one.setPageName(cmsPage.getPageName());
+            //更新访问路径
+            one.setPageWebPath(cmsPage.getPageWebPath());
+            //更新物理路径
+            one.setPagePhysicalPath(cmsPage.getPagePhysicalPath());
+            //执行更新
+            CmsPage save = cmsPageRepository.save(one);
+            if (save != null) {
+                //返回成功
+                CmsPageResult cmsPageResult = new CmsPageResult(CommonCode.SUCCESS, save);
+                return cmsPageResult;
+            }
+        }
+        //返回失败
+        return new CmsPageResult(CommonCode.FAIL, null);
+
     }
 }
