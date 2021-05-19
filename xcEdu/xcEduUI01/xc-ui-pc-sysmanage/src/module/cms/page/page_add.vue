@@ -1,7 +1,7 @@
 <template>
   <div>
     <!--编写页面静态部分，即view部分-->
-    <el-form :model="pageForm" label-width="80px">
+    <el-form :model="pageForm" :rules="pageFormRules" ref="pageForm" label-width="80px">
       <el-form-item label="所属站点" prop="siteId">
         <el-select v-model="pageForm.siteId" placeholder="请选择站点">
           <el-option
@@ -47,6 +47,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button type="primary" @click="addSubmit">提交</el-button>
+      <el-button type="primary" @click="go_back" >返回</el-button>
     </div>
 
   </div>
@@ -70,13 +71,44 @@
           pagePhysicalPath: '',
           pageType: '',
           pageCreateTime: new Date()
+        },
+        pageFormRules: {
+          siteId:[
+            {required: true, message: '请选择站点', trigger: 'blur'}
+          ],
+          templateId:[
+            {required: true, message: '请选择模版', trigger: 'blur'}
+          ],
+          pageName: [
+            {required: true, message: '请输入页面名称', trigger: 'blur'}
+          ],
+          pageWebPath: [
+            {required: true, message: '请输入访问路径', trigger: 'blur'}
+          ],
+          pagePhysicalPath: [
+            {required: true, message: '请输入物理路径', trigger: 'blur'}
+          ]
         }
-
       }
     },
     methods: {
       addSubmit: function () {
-        alert("提交")
+        this.$refs.pageForm.validate((valid) => {
+          if (valid) {
+            alert('提交');
+          } else {
+            // alert('校验失败');
+            return false;
+          }
+        })
+      },
+      go_back: function () {
+        this.$router.push({// this是当前vue实例，$router得到当前路由，push设置当前路由
+          path: '/cms/page/list', query: {
+            page: this.$route.query.page,// this.$route.query 表示取出路由上的参数列表
+            siteId:this.$route.query.siteId
+          }
+        })
       }
     },
     // 钩子方法

@@ -13,9 +13,15 @@
             :value="item.siteId">
           </el-option>
         </el-select>
-        页面别名：<el-input v-model="params.pageAliase" style="width: 100px"></el-input>
+        页面别名：
+        <el-input v-model="params.pageAliase" style="width: 100px"></el-input>
         <el-button type="primary" v-on:click="query" size="small">查询</el-button>
-        <router-link class="mui-tab-item" :to="{path:'/cms/page/add/'}">
+        <router-link class="mui-tab-item" :to="{path:'/cms/page/add/',query:{
+            page: this.params.page,
+            siteId: this.params.siteId}}">
+          <!--说明：router-link是vue提供的路由功能，用于在页面生成路由链接，最终在html渲染后就是<a标签。-->
+          <!--to：目标路由地址-->
+          <!--说明：query表示在路由url上带上参数-->
           <el-button type="primary" size="small">新增页面</el-button>
         </router-link>
       </el-form>
@@ -55,12 +61,12 @@
   export default {
     data() {
       return {
-        siteList:[],//站点列表
+        siteList: [],//站点列表
         list: [],
         total: 0,
         params: {
-          siteId:'',
-          pageAliase:'',
+          siteId: '',
+          pageAliase: '',
           page: 1,// 页码
           size: 10// 每页显示个数
         }
@@ -84,6 +90,11 @@
         })
       }
     },
+    created() {
+      // 从url路由中获取页码和站点id并赋值给数据模型对象，从而实现页面回显
+      this.params.page = Number.parseInt(this.$route.query.page||1);
+      this.params.siteId = this.$route.query.siteId||'';
+    },
     // 钩子方法
     mounted() {
       // 默认查询页面
@@ -91,12 +102,12 @@
       this.query()
       this.siteList = [
         {
-          siteId:'5a751fab6abb5044e0d19ea1',
-          siteName:'门户主站'
+          siteId: '5a751fab6abb5044e0d19ea1',
+          siteName: '门户主站'
         },
         {
-          siteId:'102',
-          siteName:'测试站'
+          siteId: '102',
+          siteName: '测试站'
         }
       ]
     }

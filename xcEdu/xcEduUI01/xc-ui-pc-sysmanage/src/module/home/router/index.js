@@ -3,7 +3,7 @@ export default [{
     path: '/',
     component: Home,
     name: '系统管理首页',
-    hidden: true
+    hidden: false
     // ,
     // redirect: '/home',
     // children: [
