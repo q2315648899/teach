@@ -27,7 +27,8 @@
         layout="prev, pager, next"
         :page-size="this.params.size"
         v-on:current-change="changePage"
-        :total="total" :current-page="this.params.page" style="float:right;"><!--v-on:current-change="changePage"也可写成@:current-change="changePage"-->
+        :total="total" :current-page="this.params.page" style="float:right;">
+        <!--v-on:current-change="changePage"也可写成@:current-change="changePage"-->
       </el-pagination>
     </div>
   </div>
@@ -35,6 +36,7 @@
 <script>
   /*编写页面静态部分，即model及vm部分。*/
   import * as cmsApi from '../api/cms'
+
   export default {
     data() {
       return {
@@ -51,18 +53,24 @@
       changePage: function (page) {
         this.params.page = page;
         // 调用query方法
-        this.query();
+        this.query()
       },
       // 查询
       query: function () {
         // alert("查询");
         // 调用服务端的接口
-        cmsApi.page_list(this.params.page,this.params.size).then((res)=>{
+        cmsApi.page_list(this.params.page, this.params.size).then((res) => {
           // 将res结果数据赋值给数据模型对象
           this.list = res.queryResult.list;
           this.total = res.queryResult.total;
         })
       }
+    },
+    // 钩子方法
+    mounted() {
+      // 默认查询页面
+      // DOM元素渲染生成完成后立即调用
+      this.query()
     }
   }
 </script>
