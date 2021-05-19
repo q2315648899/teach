@@ -34,7 +34,7 @@
 </template>
 <script>
   /*编写页面静态部分，即model及vm部分。*/
-  import * as cmsApi from '../api/cms';
+  import * as cmsApi from '../api/cms'
   export default {
     data() {
       return {
@@ -76,8 +76,8 @@
           }],
         total: 50,
         params: {
-          page: 1,// 页码
-          size: 2// 每页显示个数
+          page: 2,// 页码
+          size: 10// 每页显示个数
         }
       }
     },
