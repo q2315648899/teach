@@ -34,6 +34,7 @@
 </template>
 <script>
   /*编写页面静态部分，即model及vm部分。*/
+  import * as cmsApi from '../api/cms';
   export default {
     data() {
       return {
@@ -88,7 +89,13 @@
       },
       // 查询
       query: function () {
-        alert("查询");
+        // alert("查询");
+        // 调用服务端的接口
+        cmsApi.page_list(this.params.page,this.params.size).then((res)=>{
+          // 将res结果数据赋值给数据模型对象
+          this.list = res.queryResult.list;
+          this.total = res.queryResult.total;
+        })
       }
     }
   }
