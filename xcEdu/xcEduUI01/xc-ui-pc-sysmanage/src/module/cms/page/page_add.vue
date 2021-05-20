@@ -109,6 +109,8 @@
                   //将表单内容清空
                   //this.$refs['pageForm']等效于this.$refs.pageForm
                   this.$refs['pageForm'].resetFields();
+                } else if(res.message){
+                  this.$message.error(res.message);
                 } else {
                   this.$message.error('提交失败');
                 }
