@@ -24,7 +24,7 @@ export const page_get= id => {
 
 // 修改页面提交
 export const page_edit= (id,params) => {
-  // return http.requestPost(apiUrl+'/cms/page/add',params)
+  return http.requestPut(apiUrl+'/cms/page/edit/'+id,params)
 }
 
 
