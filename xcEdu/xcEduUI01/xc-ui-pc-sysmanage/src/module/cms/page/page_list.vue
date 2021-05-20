@@ -43,7 +43,16 @@
         </el-table-column>
         <el-table-column prop="pageCreateTime" label="创建时间" width="180">
         </el-table-column>
+        <el-table-column label="操作" width="80">
+          <template slot-scope="page">
+            <el-button
+              size="small"type="text"
+              @click="edit(page.row.pageId)">编辑
+            </el-button>
+          </template>
+        </el-table-column>
       </el-table>
+      <!--分页组件-->
       <el-pagination
         layout="prev, pager, next"
         :page-size="this.params.size"
@@ -88,7 +97,14 @@
           this.list = res.queryResult.list;
           this.total = res.queryResult.total;
         })
+      },
+      // 修改
+      edit:function (pageId) {
+        this.$router.push({ path: '/cms/page/edit/'+pageId,query:{
+            page: this.params.page,
+            siteId: this.params.siteId}})
       }
+
     },
     // 钩子方法
     created() {
