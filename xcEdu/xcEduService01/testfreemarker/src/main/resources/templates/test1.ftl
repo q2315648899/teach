@@ -21,9 +21,9 @@ Hello ${name}!
         <tr>
             <#--_index：得到循环的下标，使用方法是在stu后边加"_index"，它的值是从0开始-->
             <td>${stu_index+1}</td>
-            <td>${stu.name}</td>
+            <td <#if stu.name =='小明'>style="background:red;"</#if>>${stu.name}</td>
             <td>${stu.age}</td>
-            <td>${stu.money}</td>
+            <td <#if (stu.money > 300)>style="background:red;"</#if>>${stu.money}</td>
             <#--<td>${stu.birthday}</td>-->
         </tr>
     </#list>
