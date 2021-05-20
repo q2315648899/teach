@@ -49,6 +49,10 @@
               size="small"type="text"
               @click="edit(page.row.pageId)">编辑
             </el-button>
+            <el-button
+              size="small"type="text"
+              @click="del(page.row.pageId)">删除
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -103,7 +107,29 @@
         this.$router.push({ path: '/cms/page/edit/'+pageId,query:{
             page: this.params.page,
             siteId: this.params.siteId}})
+      },
+      // 删除
+      del:function (pageId) {
+        this.$confirm('确认删除此页面吗?', '提示', {}).then(() => {
+          // 调用服务端接口
+          cmsApi.page_del(pageId).then((res)=>{
+            if(res.success){
+              this.$message({
+                type: 'success',
+                message: '删除成功!'
+              });
+              //查询页面
+              this.query()
+            }else{
+              this.$message({
+                type: 'error',
+                message: '删除失败!'
+              });
+            }
+          })
+        })
       }
+
 
     },
     // 钩子方法
