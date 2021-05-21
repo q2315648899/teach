@@ -250,7 +250,7 @@ public class PageService {
     }
 
     // 获取页面模板
-    public String getTemplateByPageId(String pageId) {
+    private String getTemplateByPageId(String pageId) {
         // 查询页面信息
         CmsPage cmsPage = this.getById(pageId);
         if (cmsPage == null) {
@@ -279,6 +279,7 @@ public class PageService {
             // 获取流中的数据
             try {
                 String content = IOUtils.toString(gridFsResource.getInputStream(), "UTF-8");
+                return content;
             } catch (IOException e) {
                 e.printStackTrace();
             }
