@@ -17,6 +17,7 @@ import java.util.Map;
 @RunWith(SpringRunner.class)
 public class RestTemplateTest {
 
+    // SpringMVC提供 RestTemplate请求http接口，RestTemplate的底层可以使用第三方的http客户端工具实现http 的请求
     @Autowired
     RestTemplate restTemplate;
 
