@@ -45,7 +45,6 @@ public class FreemarkerController {
         map.put("stu1", stu1);
         //向数据模型放map数据
         map.put("stuMap", stuMap);
-        //返回模板文件名称
         // 返回模板文件名称(返回freemarker模板的位置，基于resources/templates路径的)
         return "test1";
     }
