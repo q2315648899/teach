@@ -78,7 +78,7 @@ public class FreemarkerTest {
         // 静态化
         String content = FreeMarkerTemplateUtils.processTemplateIntoString(template, map);
         System.out.println(content);
-        //静态化内容
+        // 静态化内容
         InputStream inputStream = IOUtils.toInputStream(content);
         //输出文件
         FileOutputStream fileOutputStream = new FileOutputStream(new File("d:/test1.html"));

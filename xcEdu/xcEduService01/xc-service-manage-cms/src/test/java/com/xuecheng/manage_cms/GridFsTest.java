@@ -62,8 +62,8 @@ public class GridFsTest {
         //创建gridFsResource，用于获取流对象
         GridFsResource gridFsResource = new GridFsResource(gridFSFile, gridFSDownloadStream);
         //获取流中的数据
-        String s = IOUtils.toString(gridFsResource.getInputStream(), "UTF-8");
-        System.out.println(s);
+        String content = IOUtils.toString(gridFsResource.getInputStream(), "UTF-8");
+        System.out.println(content);
     }
 
     // 删除文件
