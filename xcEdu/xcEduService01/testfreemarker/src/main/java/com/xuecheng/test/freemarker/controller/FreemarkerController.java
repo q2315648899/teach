@@ -17,6 +17,7 @@ public class FreemarkerController {
     public String freemarker(Map<String, Object> map) {
         //向数据模型放数据
         map.put("name", "黑马程序员");
+        map.put("point",21251231);
         Student stu1 = new Student();
         stu1.setName("小明");
         stu1.setAge(18);
@@ -26,7 +27,7 @@ public class FreemarkerController {
         stu2.setName("小红");
         stu2.setMoney(200.1f);
         stu2.setAge(19);
-        // stu2.setBirthday(new Date());
+        stu2.setBirthday(new Date());
         List<Student> friends = new ArrayList<>();
         friends.add(stu1);
         stu2.setFriends(friends);

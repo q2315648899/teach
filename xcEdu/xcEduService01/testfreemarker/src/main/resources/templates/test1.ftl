@@ -14,7 +14,7 @@ Hello ${name}!
         <td>姓名</td>
         <td>年龄</td>
         <td>金额</td>
-        <#--<td>出生日期</td>-->
+        <td>出生日期</td>
     </tr>
     <#if stus??>
     <#--FTL指令：和HTML标记类似，名字前加#予以区分，Freemarker会解析标签中的表达式或逻辑。-->
@@ -25,9 +25,11 @@ Hello ${name}!
             <td <#if stu.name =='小明'>style="background:red;"</#if>>${stu.name}</td>
             <td>${stu.age}</td>
             <td <#if (stu.money > 300)>style="background:red;"</#if>>${stu.money}</td>
-        <#--<td>${stu.birthday}</td>-->
+            <td>${stu.birthday?string("yyyy年MM月")}</td>
         </tr>
         </#list>
+        <br/>
+        学生的个数：${stus?size}
     </#if>
 </table>
 <br/>
@@ -43,6 +45,17 @@ Hello ${name}!
 姓名：${stuMap[k].name}<br/>
 年龄：${stuMap[k].age}<br/>
 </#list>
+<br/>
+内建函数c
+<br/>
+${point?c}
+<br/>
+将json字符串转成对象
+<br/>
+<#assign text="{'bank':'工商银行','account':'10101920201920212'}" />
+<#assign data=text?eval />
+开户行：${data.bank} 账号：${data.account}
+
 </body>
 
 </html>
