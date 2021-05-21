@@ -31,28 +31,29 @@
         style="width: 100%">
         <el-table-column type="index" width="60">
         </el-table-column>
-        <el-table-column prop="pageName" label="页面名称" width="120">
+        <el-table-column prop="pageName" label="页面名称" width="150">
         </el-table-column>
         <el-table-column prop="pageAliase" label="别名" width="120">
         </el-table-column>
-        <el-table-column prop="pageType" label="页面类型" width="150">
+        <el-table-column prop="pageType" label="页面类型" width="100">
         </el-table-column>
         <el-table-column prop="pageWebPath" label="访问路径" width="250">
         </el-table-column>
         <el-table-column prop="pagePhysicalPath" label="物理路径" width="250">
         </el-table-column>
-        <el-table-column prop="pageCreateTime" label="创建时间" width="180">
-        </el-table-column>
-        <el-table-column label="操作" width="80">
+        <!--<el-table-column prop="pageCreateTime" label="创建时间" width="180">-->
+        <!--</el-table-column>-->
+        <el-table-column label="操作" width="200">
           <template slot-scope="page">
             <el-button
-              size="small"type="text"
+              size="small" type="text"
               @click="edit(page.row.pageId)">编辑
             </el-button>
             <el-button
-              size="small"type="text"
+              size="small" type="text"
               @click="del(page.row.pageId)">删除
             </el-button>
+            <el-button @click="preview(page.row.pageId)" type="text" size="small">页面预览</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -103,24 +104,27 @@
         })
       },
       // 修改
-      edit:function (pageId) {
-        this.$router.push({ path: '/cms/page/edit/'+pageId,query:{
+      edit: function (pageId) {
+        this.$router.push({
+          path: '/cms/page/edit/' + pageId, query: {
             page: this.params.page,
-            siteId: this.params.siteId}})
+            siteId: this.params.siteId
+          }
+        })
       },
       // 删除
-      del:function (pageId) {
+      del: function (pageId) {
         this.$confirm('确认删除此页面吗?', '提示', {}).then(() => {
           // 调用服务端接口
-          cmsApi.page_del(pageId).then((res)=>{
-            if(res.success){
+          cmsApi.page_del(pageId).then((res) => {
+            if (res.success) {
               this.$message({
                 type: 'success',
                 message: '删除成功!'
               });
               //查询页面
               this.query()
-            }else{
+            } else {
               this.$message({
                 type: 'error',
                 message: '删除失败!'
@@ -128,15 +132,18 @@
             }
           })
         })
+      },
+      //页面预览
+      preview: function (pageId){
+        // 打开浏览器窗口
+        window.open("http://www.xuecheng.com/cms/preview/"+pageId)
       }
-
-
-    },
+  },
     // 钩子方法
     created() {
       // 从url路由中获取页码和站点id并赋值给数据模型对象，从而实现页面回显
-      this.params.page = Number.parseInt(this.$route.query.page||1);
-      this.params.siteId = this.$route.query.siteId||'';
+      this.params.page = Number.parseInt(this.$route.query.page || 1);
+      this.params.siteId = this.$route.query.siteId || '';
     },
     // 钩子方法
     mounted() {
