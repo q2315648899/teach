@@ -16,25 +16,27 @@ Hello ${name}!
         <td>金额</td>
         <#--<td>出生日期</td>-->
     </tr>
+    <#if stus??>
     <#--FTL指令：和HTML标记类似，名字前加#予以区分，Freemarker会解析标签中的表达式或逻辑。-->
-    <#list stus as stu>
+        <#list stus as stu>
         <tr>
-            <#--_index：得到循环的下标，使用方法是在stu后边加"_index"，它的值是从0开始-->
+        <#--_index：得到循环的下标，使用方法是在stu后边加"_index"，它的值是从0开始-->
             <td>${stu_index+1}</td>
             <td <#if stu.name =='小明'>style="background:red;"</#if>>${stu.name}</td>
             <td>${stu.age}</td>
             <td <#if (stu.money > 300)>style="background:red;"</#if>>${stu.money}</td>
-            <#--<td>${stu.birthday}</td>-->
+        <#--<td>${stu.birthday}</td>-->
         </tr>
-    </#list>
+        </#list>
+    </#if>
 </table>
 <br/>
 遍历数据模型中的stuMap（map数据），第一种方法：在中括号里填写map的key，第二种方法：在map后面直接加“.key”
 <br/>
-姓名：${stuMap['stu1'].name}<br/>
-年龄：${stuMap['stu1'].age}<br/>
-姓名：${stuMap.stu1.name}<br/>
-年龄：${stuMap.stu1.age}<br/>
+姓名：${(stuMap['stu1'].name)!''}<br/>
+年龄：${(stuMap['stu1'].age)!''}<br/>
+姓名：${(stuMap.stu1.name)!''}<br/>
+年龄：${(stuMap.stu1.age)!''}<br/>
 遍历map中的key。stuMap?keys就是key列表（是一个list）
 <br/>
 <#list stuMap?keys as k>
