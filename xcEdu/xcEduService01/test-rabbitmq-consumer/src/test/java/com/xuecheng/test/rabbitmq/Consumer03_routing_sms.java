@@ -17,6 +17,7 @@ public class Consumer03_routing_sms {
     private static final String EXCHANGE_ROUTING_INFORM="exchange_routing_inform";
     // routingkey
     private static final String ROUTINGKEY_SMS = "inform_sms";
+    private static final String ROUTINGKEY_INFO = "inform";
 
     public static void main(String[] args) throws IOException, TimeoutException {
         // 通过连接窗口创建新的连接和mq建立连接
@@ -67,6 +68,7 @@ public class Consumer03_routing_sms {
          * param3：路由key，作用是交换机根据路由key的值将信息转发到指定的队列中，在发布订阅模式中设置为空字符串
          */
         channel.queueBind(QUEUE_INFORM_SMS, EXCHANGE_ROUTING_INFORM, ROUTINGKEY_SMS);
+        channel.queueBind(QUEUE_INFORM_SMS, EXCHANGE_ROUTING_INFORM, ROUTINGKEY_INFO);
 
         // 消费消息的方法
         DefaultConsumer consumer = new DefaultConsumer(channel) {

@@ -22,6 +22,7 @@ public class Producer03_routing {
     // routingkey
     private static final String ROUTINGKEY_EMAIL = "inform_email";
     private static final String ROUTINGKEY_SMS = "inform_sms";
+    private static final String ROUTINGKEY_INFO = "inform";
 
     public static void main(String[] args) {
         // 通过连接窗口创建新的连接和mq建立连接
@@ -75,43 +76,43 @@ public class Producer03_routing {
              * param3：路由key，作用是交换机根据路由key的值将信息转发到指定的队列中，在发布订阅模式中设置为空字符串
              */
             channel.queueBind(QUEUE_INFORM_EMAIL, EXCHANGE_ROUTING_INFORM, ROUTINGKEY_EMAIL);
-            channel.queueBind(QUEUE_INFORM_EMAIL, EXCHANGE_ROUTING_INFORM, "inform");
+            channel.queueBind(QUEUE_INFORM_EMAIL, EXCHANGE_ROUTING_INFORM, ROUTINGKEY_INFO);
             channel.queueBind(QUEUE_INFORM_SMS, EXCHANGE_ROUTING_INFORM, ROUTINGKEY_SMS);
-            channel.queueBind(QUEUE_INFORM_SMS, EXCHANGE_ROUTING_INFORM, "inform");
+            channel.queueBind(QUEUE_INFORM_SMS, EXCHANGE_ROUTING_INFORM, ROUTINGKEY_INFO);
 
-//            // 发送邮件消息
-//            for (int i = 0; i < 5; i++) {
-//                // 消息发布方法
-//                // 参数：String exchange, String routingKey, BasicProperties props, byte[] body
-//                /**
-//                 * 参数明细
-//                 * param1：Exchange的名称，如果没有指定，则使用Default Exchange（mq的默认交换机）
-//                 * param2:routingKey,消息的路由Key，是用于Exchange（交换机）将消息转发到指定的消息队列，如果使用默认交换机，routingKey设置为队列的名称
-//                 * param3:消息包含的属性
-//                 * param4：消息内容
-//                 *
-//                 * 这里没有指定交换机，消息将发送给默认交换机，每个队列也会绑定那个默认的交换机，但是不能显示绑定或解除绑定
-//                 * 默认的交换机，routingKey等于队列名称
-//                 * */
-//                // 消息内容
-//                String message = "send email inform message to user";
-//                channel.basicPublish(EXCHANGE_ROUTING_INFORM, ROUTINGKEY_EMAIL, null, message.getBytes());
-//                System.out.println("send to mq " + message);
-//            }
-//
-//            // 发送短信消息
-//            for (int i = 0; i < 5; i++) {
-//                // 消息内容
-//                String message = "send sms inform message to user";
-//                channel.basicPublish(EXCHANGE_ROUTING_INFORM, ROUTINGKEY_SMS, null, message.getBytes());
-//                System.out.println("send to mq " + message);
-//            }
+            // 发送邮件消息
+            for (int i = 0; i < 5; i++) {
+                // 消息发布方法
+                // 参数：String exchange, String routingKey, BasicProperties props, byte[] body
+                /**
+                 * 参数明细
+                 * param1：Exchange的名称，如果没有指定，则使用Default Exchange（mq的默认交换机）
+                 * param2:routingKey,消息的路由Key，是用于Exchange（交换机）将消息转发到指定的消息队列，如果使用默认交换机，routingKey设置为队列的名称
+                 * param3:消息包含的属性
+                 * param4：消息内容
+                 *
+                 * 这里没有指定交换机，消息将发送给默认交换机，每个队列也会绑定那个默认的交换机，但是不能显示绑定或解除绑定
+                 * 默认的交换机，routingKey等于队列名称
+                 * */
+                // 消息内容
+                String message = "send email inform message to user";
+                channel.basicPublish(EXCHANGE_ROUTING_INFORM, ROUTINGKEY_EMAIL, null, message.getBytes());
+                System.out.println("send to mq " + message);
+            }
+
+            // 发送短信消息
+            for (int i = 0; i < 5; i++) {
+                // 消息内容
+                String message = "send sms inform message to user";
+                channel.basicPublish(EXCHANGE_ROUTING_INFORM, ROUTINGKEY_SMS, null, message.getBytes());
+                System.out.println("send to mq " + message);
+            }
 
             // 发送短信和邮件消费者都能接收到消息（发布订阅模式publish/subscribe）
             for (int i = 0; i < 5; i++) {
                 // 消息内容
                 String message = "send inform message to user";
-                channel.basicPublish(EXCHANGE_ROUTING_INFORM, "inform", null, message.getBytes());
+                channel.basicPublish(EXCHANGE_ROUTING_INFORM, ROUTINGKEY_INFO, null, message.getBytes());
                 System.out.println("send to mq " + message);
             }
         } catch (Exception e) {

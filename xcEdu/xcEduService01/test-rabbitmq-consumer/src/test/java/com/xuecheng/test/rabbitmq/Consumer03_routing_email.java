@@ -14,9 +14,10 @@ public class Consumer03_routing_email {
     // 队列名称
     private static final String QUEUE_INFORM_EMAIL = "queue_inform_email";// 邮件
     // exchange交换机名称
-    private static final String EXCHANGE_ROUTING_INFORM="exchange_routing_inform";
+    private static final String EXCHANGE_ROUTING_INFORM = "exchange_routing_inform";
     // routingkey
     private static final String ROUTINGKEY_EMAIL = "inform_email";
+    private static final String ROUTINGKEY_INFO = "inform";
 
     public static void main(String[] args) throws IOException, TimeoutException {
         // 通过连接窗口创建新的连接和mq建立连接
@@ -67,6 +68,7 @@ public class Consumer03_routing_email {
          * param3：路由key，作用是交换机根据路由key的值将信息转发到指定的队列中，在发布订阅模式中设置为空字符串
          */
         channel.queueBind(QUEUE_INFORM_EMAIL, EXCHANGE_ROUTING_INFORM, ROUTINGKEY_EMAIL);
+        channel.queueBind(QUEUE_INFORM_EMAIL, EXCHANGE_ROUTING_INFORM, ROUTINGKEY_INFO);
 
         // 消费消息的方法
         DefaultConsumer consumer = new DefaultConsumer(channel) {
