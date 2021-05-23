@@ -18,7 +18,8 @@
             <artifactId>amqp-client</artifactId>
             <version>4.0.3</version>&lt;!&ndash;此版本与spring boot 1.5.9版本匹配&ndash;&gt;
         </dependency>-->
-
+        <!--我们选择基于Spring-Rabbit去操作RabbitMQ-->
+        <!--使用spring-boot-starter-amqp会自动添加spring-rabbit依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>

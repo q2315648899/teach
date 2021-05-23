@@ -32,9 +32,9 @@ public class Producer01 {
             connection = connectionFactory.newConnection();
             // 创建会话通道，生产者和mq服务所有通信都在channel通道中完成
             channel = connection.createChannel();
+            // 声明队列，如果Rabbit中没有此队列将自动创建
+            // 参数：String queue, boolean durable, boolean exclusive, boolean autoDelete, Map<String, Object> arguments
             /**
-             * 声明队列，如果Rabbit中没有此队列将自动创建
-             * 参数：String queue, boolean durable, boolean exclusive, boolean autoDelete, Map<String, Object> arguments
              * 参数明细：
              * param1:队列名称
              * param2:是否持久化，如果持久化，mq重启后队列还在
@@ -43,9 +43,11 @@ public class Producer01 {
              * param5:队列参数，可以设置一个队列的扩展参数，比如：可设置存活时间
              */
             channel.queueDeclare(QUEUE, true, false, false, null);
+            // 发送消息
+            // 消息发布方法basicPublish
+            // 参数：String exchange, String routingKey, BasicProperties props, byte[] body
             /**
-             * 消息发布方法
-             * 参数：String exchange, String routingKey, BasicProperties props, byte[] body
+             * 参数明细：
              * param1：Exchange的名称，如果没有指定，则使用Default Exchange（mq的默认交换机）
              * param2:routingKey,消息的路由Key，是用于Exchange（交换机）将消息转发到指定的消息队列，如果使用默认交换机，routingKey设置为队列的名称
              * param3:消息包含的属性

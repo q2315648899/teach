@@ -3,20 +3,23 @@ package com.xuecheng.test.rabbitmq.config;
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
+ * springboot整合rabbitmq的配置类
  * Create by wong on 2021/5/23
  */
-public class RabbitConfig {
+@Configuration
+public class RabbitmqConfig {
 
     // 队列名称
-    private static final String QUEUE_INFORM_EMAIL = "queue_inform_email";// 邮箱
-    private static final String QUEUE_INFORM_SMS = "queue_inform_sms";// 短信
+    public static final String QUEUE_INFORM_EMAIL = "queue_inform_email";// 邮箱
+    public static final String QUEUE_INFORM_SMS = "queue_inform_sms";// 短信
     // exchange交换机名称
-    private static final String EXCHANGE_TOPICS_INFORM = "exchange_topics_inform";
+    public static final String EXCHANGE_TOPICS_INFORM = "exchange_topics_inform";
     // routingkey
-    private static final String ROUTINGKEY_EMAIL = "inform.#.email.#";
-    private static final String ROUTINGKEY_SMS = "inform.#.sms.#";
+    public static final String ROUTINGKEY_EMAIL = "inform.#.email.#";
+    public static final String ROUTINGKEY_SMS = "inform.#.sms.#";
 
     // 声明交换机
     @Bean(EXCHANGE_TOPICS_INFORM)

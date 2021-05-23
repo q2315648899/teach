@@ -82,7 +82,7 @@ public class Producer03_routing {
 
             // 发送邮件消息
             for (int i = 0; i < 5; i++) {
-                // 消息发布方法
+                // 消息发布方法basicPublish
                 // 参数：String exchange, String routingKey, BasicProperties props, byte[] body
                 /**
                  * 参数明细

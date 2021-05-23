@@ -30,9 +30,9 @@ public class Consumer02_subscribe_sms {
         // 创建会话通道，消费者和mq服务所有通信也都在channel通道中完成
         Channel channel = connection.createChannel();
 
+        // 声明队列，如果Rabbit中没有此队列将自动创建
+        // 参数：String queue, boolean durable, boolean exclusive, boolean autoDelete, Map<String, Object> arguments
         /**
-         * 声明队列，如果Rabbit中没有此队列将自动创建
-         * 参数：String queue, boolean durable, boolean exclusive, boolean autoDelete, Map<String, Object> arguments
          * 参数明细：
          * param1:队列名称
          * param2:是否持久化，如果持久化，mq重启后队列还在
@@ -94,10 +94,9 @@ public class Consumer02_subscribe_sms {
             }
         };
 
+        //  监听队列
+        //  参数：String queue, boolean autoAck, Consumer callback
         /**
-         *
-         * 监听队列
-         * 参数：String queue, boolean autoAck, Consumer callback
          * 参数明细：
          * param1:队列名称
          * param2:自动回复，当消费者接收到消息后要告诉mq消息已接受，如果将此参数设置为true表示会自动回复mq，mq接收到回复会删除消息，设置
