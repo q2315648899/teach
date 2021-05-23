@@ -43,9 +43,9 @@ public class GridFsTest {
         //要存储的文件
         File file = new File("d:/index_banner.ftl");
         //定义输入流
-        FileInputStream inputStram = new FileInputStream(file);
+        FileInputStream inputStream = new FileInputStream(file);
         //向GridFS存储文件
-        ObjectId objectId = gridFsTemplate.store(inputStram, "index_banner.ftl", "");
+        ObjectId objectId = gridFsTemplate.store(inputStream, "index_banner.ftl", "");
         //得到文件ID
         String fileId = objectId.toString();
         System.out.println(file);
