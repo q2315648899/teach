@@ -3,11 +3,13 @@ package com.xuecheng.test.rabbitmq.config;
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * springboot整合rabbitmq的配置类
  * Create by wong on 2021/5/23
  */
+@Configuration
 public class RabbitmqConfig {
 
     // 队列名称

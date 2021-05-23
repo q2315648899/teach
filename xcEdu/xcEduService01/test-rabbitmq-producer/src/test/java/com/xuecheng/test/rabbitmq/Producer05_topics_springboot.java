@@ -12,7 +12,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * springboot整合rabbitmq（生产者）
  * Create by wong on 2021/5/23
  */
-// @SpringBootTest
+// @SpringBootTest表示启动springboot引导类（本例为TestRabbitmqApplication.java）来启动springboot，不加该注释只是一个单纯的测试类，不启动springboot
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class Producer05_topics_springboot {
