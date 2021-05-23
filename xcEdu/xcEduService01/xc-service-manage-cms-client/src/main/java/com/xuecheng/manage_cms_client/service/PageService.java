@@ -17,6 +17,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.gridfs.GridFsResource;
 import org.springframework.data.mongodb.gridfs.GridFsTemplate;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.Optional;
@@ -24,6 +25,7 @@ import java.util.Optional;
 /**
  * Create by wong on 2021/5/23
  */
+@Service
 public class PageService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PageService.class);
