@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * 监听MQ，接收也页面发布消息
+ * 监听MQ，接收页面发布消息
  * Create by wong on 2021/5/23
  */
 @Component

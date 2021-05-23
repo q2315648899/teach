@@ -54,6 +54,9 @@
               @click="del(page.row.pageId)">删除
             </el-button>
             <el-button @click="preview(page.row.pageId)" type="text" size="small">页面预览</el-button>
+            <el-button
+              size="small" type="primary" plain @click="postPage(page.row.pageId)">发布
+            </el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -137,6 +140,22 @@
       preview: function (pageId){
         // 打开浏览器窗口
         window.open("http://www.xuecheng.com/cms/preview/"+pageId)
+      },
+      // 页面发布
+      postPage: function (pageId) {
+        this.$confirm('确认发布该页面吗?', '提示', {
+        }).then(() => {
+          // 调用服务端接口
+          cmsApi.page_postPage(pageId).then((res) => {
+            if(res.success){
+              console.log('发布页面id='+pageId);
+              this.$message.success('发布成功，请稍后查看结果');
+            }else{
+              this.$message.error('发布失败');
+            }
+          });
+        }).catch(() => {
+        });
       }
   },
     // 钩子方法
