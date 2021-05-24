@@ -21,10 +21,13 @@ public class TestDao {
     CourseBaseRepository courseBaseRepository;
     @Autowired
     CourseMapper courseMapper;
+    @Autowired
+    TeachPlanMapper teachPlanMapper;
+
     @Test
-    public void testCourseBaseRepository(){
+    public void testCourseBaseRepository() {
         Optional<CourseBase> optional = courseBaseRepository.findById("402885816240d276016240f7e5000002");
-        if(optional.isPresent()){
+        if (optional.isPresent()) {
             CourseBase courseBase = optional.get();
             System.out.println(courseBase);
         }
@@ -32,9 +35,15 @@ public class TestDao {
     }
 
     @Test
-    public void testCourseMapper(){
+    public void testCourseMapper() {
         CourseBase courseBase = courseMapper.findCourseBaseById("402885816240d276016240f7e5000002");
         System.out.println(courseBase);
 
+    }
+
+    @Test
+    public void testFindTeachPlan() {
+        TeachplanNode teachplanNode = teachPlanMapper.selectList("4028e581617f945f01617f9dabc40000");
+        System.out.println(teachplanNode);
     }
 }
