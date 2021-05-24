@@ -15,7 +15,7 @@ public class CourseService {
     TeachPlanMapper teachPlanMapper;
 
     // 课程计划查询
-    public TeachplanNode findTechPlanListById(String courseId) {
+    public TeachplanNode findTeachplanListById(String courseId) {
         return teachPlanMapper.selectList(courseId);
     }
 }

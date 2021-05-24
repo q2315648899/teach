@@ -20,8 +20,8 @@ public class CourseController implements CourseControllerApi {
     CourseService courseService;
 
     @Override
-    @GetMapping("/teachPlan/list/{courseId}")
-    public TeachplanNode findTeachPlanListById(@PathVariable("courseId") String courseId) {
-        return courseService.findTechPlanListById(courseId);
+    @GetMapping("/teachplan/list/{courseId}")
+    public TeachplanNode findTeachplanListById(@PathVariable("courseId") String courseId) {
+        return courseService.findTeachplanListById(courseId);
     }
 }
