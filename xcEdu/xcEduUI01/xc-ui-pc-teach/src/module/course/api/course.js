@@ -19,6 +19,14 @@ export const getCoursebaseById = courseId => {
 export const updateCoursebase = (courseId,params) => {
   return http.requestPut(apiUrl+'/course/coursebase/update/'+courseId,params)
 }
+//查询课程营销信息
+export const getCourseMarketById = courseId => {
+  return http.requestQuickGet(apiUrl+'/course/coursemarket/get/'+courseId)
+}
+// 更新课程营销信息
+export const updateCourseMarket = (courseId,params) => {
+  return http.requestPut(apiUrl+'/course/coursemarket/update/'+courseId,params)
+}
 //查询课程分类
 export const category_findlist= () => {
   return http.requestQuickGet(apiUrl+'/category/list')
