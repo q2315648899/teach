@@ -8,5 +8,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface TeachPlanMapper {
-    public TeachplanNode selectList(String courseId);
+    // 课程计划查询
+    TeachplanNode selectList(String courseId);
 }
