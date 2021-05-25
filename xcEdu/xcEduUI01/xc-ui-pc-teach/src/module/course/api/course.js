@@ -11,6 +11,14 @@ export const findCourseList = (page,size,params) => {
   return http.requestQuickGet(apiUrl+"/course/coursebase/list/"+page+"/"+size+"?"+queries)
 }
 
+//查询课程基本信息
+export const getCoursebaseById = courseId => {
+  return http.requestQuickGet(apiUrl+'/course/coursebase/get/'+courseId)
+}
+//更新课程基本信息
+export const updateCoursebase = (courseId,params) => {
+  return http.requestPut(apiUrl+'/course/coursebase/update/'+courseId,params)
+}
 //查询课程分类
 export const category_findlist= () => {
   return http.requestQuickGet(apiUrl+'/category/list')
