@@ -3,7 +3,9 @@ package com.xuecheng.manage_course.dao;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xuecheng.framework.domain.course.CourseBase;
+import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
+import com.xuecheng.framework.domain.course.request.CourseListRequest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,10 +54,15 @@ public class TestDao {
 
     @Test
     public void testPageHelper() {
+        /**
+         * PageHelper的使用方法及原理如下：
+         * 在调用dao的service方法中设置分页参数：PageHelper.startPage(page, size)，分页参数会设置在ThreadLocal中
+         * PageHelper在mybatis执行sql前进行拦截，从ThreadLocal取出分页参数，修改当前执行的sql语句，添加分页sql。
+         */
         // 查询第一页，每页显示十条
         PageHelper.startPage(1, 10);
-        Page<CourseBase> courseList = courseMapper.findCourseList();
-        List<CourseBase> result = courseList.getResult();
+        Page<CourseInfo> courseList = courseMapper.findCourseList(new CourseListRequest());
+        List<CourseInfo> result = courseList.getResult();
         long total = courseList.getTotal();
         System.out.println(result);
     }
