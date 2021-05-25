@@ -148,4 +148,42 @@ public class CourseService {
         courseBaseRepository.save(courseBase);
         return new AddCourseResult(CommonCode.SUCCESS, courseBase.getId());
     }
+
+    // 查询课程基本信息
+    public CourseBase getCourseBaseById(String courseId) {
+        Optional<CourseBase> optional = courseBaseRepository.findById(courseId);
+        if (optional.isPresent()) {
+            CourseBase courseBase = optional.get();
+            return courseBase;
+        }
+        return null;
+    }
+
+    // 更新课程基本信息
+    public ResponseResult updateCourseBase(String courseId, CourseBase courseBase) {
+        CourseBase one = this.getCourseBaseById(courseId);
+        if (one != null) {
+            // 更新课程名称
+            one.setName(courseBase.getName());
+            // 更新适用人群
+            one.setUsers(courseBase.getUsers());
+            // 更新课程大分类
+            one.setMt(courseBase.getMt());
+            // 更新课程小分类
+            one.setSt(courseBase.getSt());
+            // 更新课程等级
+            one.setGrade(courseBase.getGrade());
+            // 更新学习模式
+            one.setStudymodel(courseBase.getStudymodel());
+            // 更新课程介绍
+            one.setDescription(courseBase.getDescription());
+            // 执行更新
+            CourseBase save = courseBaseRepository.save(one);
+            if (save != null) {
+                return new ResponseResult(CommonCode.SUCCESS);
+            }
+        }
+
+        return new ResponseResult(CommonCode.FAIL);
+    }
 }

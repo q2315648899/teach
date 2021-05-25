@@ -26,4 +26,10 @@ public interface CourseControllerApi {
 
     @ApiOperation("新增课程")
     public AddCourseResult addCourseBase(CourseBase courseBase);
+
+    @ApiOperation("查询课程基本信息")
+    public CourseBase getCourseBaseById(String courseId);
+
+    @ApiOperation("更新课程基本信息")
+    public ResponseResult updateCourseBase(String courseId, CourseBase courseBase);
 }
