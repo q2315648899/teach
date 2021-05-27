@@ -94,5 +94,12 @@ public class CourseController implements CourseControllerApi {
         return courseService.findCoursePic(courseId);
     }
 
+    // 删除课程图片
+    @Override
+    @DeleteMapping("/coursepic/delete")
+    public ResponseResult deleteCoursePic(@RequestParam("courseId") String courseId) {
+        return courseService.deleteCoursePic(courseId);
+    }
+
 
 }
