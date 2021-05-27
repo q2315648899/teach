@@ -20,6 +20,8 @@ public class FileSystemController implements FileSystemControllerApi {
     FileSystemService fileSystemService;
 
     // 上传文件
+    // 添加@RequestParam("file")，@RequestParam(value = "filetag",则请求过来的参数名称必须为“file”，若不加，则请求的参数名称为controller接口中的形参名称
+    // @RequestParam(value = "filetag"),@RequestParam(value = "businesskey"),@RequestParam(value = "metadata"）
     @Override
     @PostMapping("/upload")
     public UploadFileResult upload(MultipartFile multipartFile, String filetag, String businesskey, String metadata) {
