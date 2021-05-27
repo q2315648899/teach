@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.client.OkHttp3ClientHttpRequestFactory;
@@ -14,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Administrator
  * @version 1.0
  **/
+@EnableFeignClients //开始feignClient
 @EnableDiscoveryClient//一个EurekaClient从EurekaServer发现服务，表示它是一个Eureka的客户端
 @SpringBootApplication
 @EntityScan("com.xuecheng.framework.domain.course")//扫描实体类

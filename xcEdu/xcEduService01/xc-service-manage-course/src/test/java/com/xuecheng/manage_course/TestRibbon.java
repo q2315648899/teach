@@ -1,5 +1,6 @@
-package com.xuecheng.manage_course.dao;
+package com.xuecheng.manage_course;
 
+import com.xuecheng.manage_course.dao.CourseBaseRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

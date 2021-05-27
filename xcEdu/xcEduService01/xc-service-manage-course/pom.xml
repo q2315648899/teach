@@ -18,11 +18,16 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <!-- 导入Ribbon客户端负载均衡的依赖 -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-ribbon</artifactId>
+        </dependency>-->
+        <!--导入Feign-->
+        <!--Feign是一个轻量级rest客户端，且集成了Ribbon实现客户端负载均衡调用-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>com.xuecheng</groupId>
