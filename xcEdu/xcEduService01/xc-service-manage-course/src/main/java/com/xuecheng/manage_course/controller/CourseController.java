@@ -79,5 +79,12 @@ public class CourseController implements CourseControllerApi {
         return courseService.updateCourseMarket(courseId, courseMarket);
     }
 
+    // 添加课程图片
+    @Override
+    @PostMapping("/coursepic/add")
+    public ResponseResult addCoursePic(@RequestParam("courseId") String courseId, @RequestParam("pic") String pic) {
+        return courseService.addCoursePic(courseId, pic);
+    }
+
 
 }

@@ -39,4 +39,7 @@ public interface CourseControllerApi {
 
     @ApiOperation("更新课程营销信息")
     public ResponseResult updateCourseMarket(String courseId, CourseMarket courseMarket);
+
+    @ApiOperation("添加课程图片")
+    public ResponseResult addCoursePic(String courseId, String pic);
 }

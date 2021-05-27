@@ -4,6 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xuecheng.framework.domain.course.CourseBase;
 import com.xuecheng.framework.domain.course.CourseMarket;
+import com.xuecheng.framework.domain.course.CoursePic;
 import com.xuecheng.framework.domain.course.Teachplan;
 import com.xuecheng.framework.domain.course.ext.CourseInfo;
 import com.xuecheng.framework.domain.course.ext.TeachplanNode;
@@ -44,6 +45,9 @@ public class CourseService {
 
     @Autowired
     CourseMarketRepository courseMarketRepository;
+
+    @Autowired
+    CoursePicRepository coursePicRepository;
 
     // 课程计划查询
     public TeachplanNode findTeachplanListById(String courseId) {
@@ -237,5 +241,24 @@ public class CourseService {
             }
         }
         return new ResponseResult(CommonCode.FAIL);
+    }
+
+    // 向课程管理数据添加课程与图片的关联信息
+    @Transactional
+    public ResponseResult addCoursePic(String courseId, String pic) {
+        CoursePic coursePic = null;
+        // 查询课程图片
+        Optional<CoursePic> optional = coursePicRepository.findById(courseId);
+        if (optional.isPresent()) {
+            coursePic = optional.get();
+        }
+        // 没有图片则新建对象
+        if (coursePic == null) {
+            coursePic = new CoursePic();
+        }
+        coursePic.setCourseid(courseId);
+        coursePic.setPic(pic);
+        coursePicRepository.save(coursePic);
+        return new ResponseResult(CommonCode.SUCCESS);
     }
 }

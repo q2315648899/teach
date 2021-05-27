@@ -1,6 +1,6 @@
 package com.xuecheng.manage_cms.controller;
 
-import com.xuecheng.api.cms.SysDicthinaryControllerApi;
+import com.xuecheng.api.cms.SysDictionaryControllerApi;
 import com.xuecheng.framework.domain.system.SysDictionary;
 import com.xuecheng.manage_cms.service.SysdictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/sys/dictionary")
-public class SysdictionaryController implements SysDicthinaryControllerApi {
+public class SysdictionaryController implements SysDictionaryControllerApi {
 
     @Autowired
     SysdictionaryService sysdictionaryService;
