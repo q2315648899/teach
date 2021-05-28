@@ -30,6 +30,9 @@ public class CmsPagePreviewController extends BaseController {
             try {
                 // 通过response对象将内容输出
                 ServletOutputStream outputStream = response.getOutputStream();
+                // 由于Nginx先请求cms的课程预览功能得到html页面，再解析页面中的ssi标签，这里必须保证cms页面预览返回的
+                // 页面的Content-Type为text/html;charset=utf-8
+                response.setHeader("Content-type","text/html;charset=utf-8");
                 outputStream.write(pageHtml.getBytes("utf-8"));
             } catch (IOException e) {
                 e.printStackTrace();
