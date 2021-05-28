@@ -13,6 +13,7 @@ import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PathVariable;
 
 /**
  * Create by wong on 2021/5/24
@@ -55,7 +56,10 @@ public interface CourseControllerApi {
     @ApiOperation("课程视图查询")
     public CourseView courseview(String id);
 
-    @ApiOperation("预览课程")
+    @ApiOperation("课程预览")
     public CoursePublishResult preview(String id);
+
+    @ApiOperation("发布课程")
+    public CoursePublishResult publish(@PathVariable String id);
 
 }
