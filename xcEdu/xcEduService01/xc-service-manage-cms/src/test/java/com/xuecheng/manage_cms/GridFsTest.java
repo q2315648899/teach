@@ -41,11 +41,11 @@ public class GridFsTest {
     @Test
     public void testGridFsTemplate() throws FileNotFoundException {
         //要存储的文件
-        File file = new File("d:/index_banner.ftl");
+        File file = new File("d:/course.ftl");
         //定义输入流
         FileInputStream inputStream = new FileInputStream(file);
         //向GridFS存储文件
-        ObjectId objectId = gridFsTemplate.store(inputStream, "index_banner.ftl", "");
+        ObjectId objectId = gridFsTemplate.store(inputStream, "course.ftl", "");
         //得到文件ID
         String fileId = objectId.toString();
         System.out.println(file);
