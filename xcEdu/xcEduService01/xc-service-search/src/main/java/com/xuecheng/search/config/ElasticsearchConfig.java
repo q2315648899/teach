@@ -17,6 +17,7 @@ public class ElasticsearchConfig {
     @Value("${xuecheng.elasticsearch.hostlist}")
     private String hostlist;
 
+    // 推荐使用当前这种estHighLevelClient
     @Bean
     public RestHighLevelClient restHighLevelClient(){
         //解析hostlist配置信息
