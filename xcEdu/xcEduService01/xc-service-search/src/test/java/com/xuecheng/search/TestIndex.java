@@ -135,6 +135,7 @@ public class TestIndex {
     }
 
     // 更新文档
+    // 使用 Client更新文档的方法是局部更新方法。可以指定文档的部分字段也可以指定完整的文档内容。
     @Test
     public void updateDoc() throws IOException {
         UpdateRequest updateRequest = new UpdateRequest("xc_course", "doc",
