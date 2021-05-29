@@ -46,7 +46,7 @@ public class TestSearch {
         // matchAllQuery搜索全部
         searchSourceBuilder.query(QueryBuilders.matchAllQuery());
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
-        searchSourceBuilder.fetchSource(new String[]{"name","studymodel","price","timestamp"}, new String[]{});
+        searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
         // 向搜索请求对象中设置搜索源
         searchRequest.source(searchSourceBuilder);
         // 执行搜索，向ES发起http请求
@@ -85,7 +85,69 @@ public class TestSearch {
             System.out.println(studymodel);
             System.out.println(description);
         }
+    }
 
+    // 分页查询
+    @Test
+    public void testSearchPage() throws IOException, ParseException {
+        // 搜索请求对象
+        SearchRequest searchRequest = new SearchRequest("xc_course");
+        // 指定类型
+        searchRequest.types("doc");
+        // 搜索源构建对象
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        // 搜索方式
+        // matchAllQuery搜索全部
+        searchSourceBuilder.query(QueryBuilders.matchAllQuery());
+        // 设置分页参数
+        // 页码
+        int page = 1;
+        // 每页记录数
+        int size = 2;
+        // 计算出起始下标
+        int from = (page - 1) * size;
+        searchSourceBuilder.from(from); // 分页查询，设置起始下标，从0开始
+        searchSourceBuilder.size(size);// 每页显示个数
+        // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
+        searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
+        // 向搜索请求对象中设置搜索源
+        searchRequest.source(searchSourceBuilder);
+        // 执行搜索，向ES发起http请求
+        SearchResponse searchResponse = client.search(searchRequest);
+        // 搜索结果
+        SearchHits hits = searchResponse.getHits();
+        // 匹配到的总记录数
+        long totalHits = hits.getTotalHits();
+        // 得到匹配度高的文档
+        SearchHit[] searchHits = hits.getHits();
+        // 日期格式化对象
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // 遍历匹配度高的文档
+        for (SearchHit hit : searchHits) {
+            // 文档所在的索引
+            String index = hit.getIndex();
+            // 文档所在的type类型
+            String type = hit.getType();
+            // 文档的主键
+            String id = hit.getId();
+            // 文档的匹配度得分
+            float score = hit.getScore();
+            String sourceAsString = hit.getSourceAsString();
+            // 源文档内容
+            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+            String name = (String) sourceAsMap.get("name");
+            // 由于上边设置了源文档字段过滤，这时description是取不到的
+            String description = (String) sourceAsMap.get("description");
+            // 学习模式
+            String studymodel = (String) sourceAsMap.get("studymodel");
+            // 价格
+            Double price = (Double) sourceAsMap.get("price");
+            // 日期
+            Date timestamp = dateFormat.parse((String) sourceAsMap.get("timestamp"));
+            System.out.println(name);
+            System.out.println(studymodel);
+            System.out.println(description);
+        }
     }
 
 }
