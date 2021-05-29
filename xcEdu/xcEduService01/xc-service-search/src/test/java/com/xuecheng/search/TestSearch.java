@@ -11,6 +11,8 @@ import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.sort.FieldSortBuilder;
+import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,11 +49,13 @@ public class TestSearch {
         searchRequest.types("doc");
         // 搜索源构建对象
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
         // 搜索方式
         // matchAllQuery搜索全部
         searchSourceBuilder.query(QueryBuilders.matchAllQuery());
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
+
         // 向搜索请求对象中设置搜索源
         searchRequest.source(searchSourceBuilder);
         // 执行搜索，向ES发起http请求
@@ -101,6 +105,7 @@ public class TestSearch {
         searchRequest.types("doc");
         // 搜索源构建对象
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
         // 搜索方式
         // matchAllQuery搜索全部
         searchSourceBuilder.query(QueryBuilders.matchAllQuery());
@@ -115,6 +120,7 @@ public class TestSearch {
         searchSourceBuilder.size(size);// 每页显示个数
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
+
         // 向搜索请求对象中设置搜索源
         searchRequest.source(searchSourceBuilder);
         // 执行搜索，向ES发起http请求
@@ -165,11 +171,13 @@ public class TestSearch {
         searchRequest.types("doc");
         // 搜索源构建对象
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
         // 搜索方式
         // 设置Term Query查询
         searchSourceBuilder.query(QueryBuilders.termQuery("name","spring开发"));
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
+
         // 向搜索请求对象中设置搜索源
         searchRequest.source(searchSourceBuilder);
         // 执行搜索，向ES发起http请求
@@ -219,6 +227,7 @@ public class TestSearch {
         searchRequest.types("doc");
         // 搜索源构建对象
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
         // 搜索方式
         // 根据id查询
         // 定义查询的id
@@ -227,6 +236,7 @@ public class TestSearch {
         searchSourceBuilder.query(QueryBuilders.termsQuery("_id", idList));
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
+
         // 向搜索请求对象中设置搜索源
         searchRequest.source(searchSourceBuilder);
         // 执行搜索，向ES发起http请求
@@ -276,6 +286,7 @@ public class TestSearch {
         searchRequest.types("doc");
         // 搜索源构建对象
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
         // 搜索方式
         // MatchQuery
         /*“spring开发框架”会被分为三个词：spring、开发、框架
@@ -284,6 +295,7 @@ public class TestSearch {
         searchSourceBuilder.query(QueryBuilders.matchQuery("description", "spring开发框架").minimumShouldMatch("80%"));
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
+
         // 向搜索请求对象中设置搜索源
         searchRequest.source(searchSourceBuilder);
         // 执行搜索，向ES发起http请求
@@ -333,6 +345,7 @@ public class TestSearch {
         searchRequest.types("doc");
         // 搜索源构建对象
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
         // 搜索方式
         // MultiMatchQuery
         // 提升boost，通常关键字匹配上name的权重要比匹配上description的权重高，这里可以对name的权重提升。
@@ -341,6 +354,7 @@ public class TestSearch {
                 .field("name", 10));//提升boost权重,10倍
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
+
         // 向搜索请求对象中设置搜索源
         searchRequest.source(searchSourceBuilder);
         // 执行搜索，向ES发起http请求
@@ -390,6 +404,7 @@ public class TestSearch {
         searchRequest.types("doc");
         // 搜索源构建对象
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
         // 搜索方式
         // 先定义一个MultiMatchQuery
         // 提升boost，通常关键字匹配上name的权重要比匹配上description的权重高，这里可以对name的权重提升。
@@ -402,10 +417,12 @@ public class TestSearch {
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         boolQueryBuilder.must(multiMatchQueryBuilder);
         boolQueryBuilder.must(termQueryBuilder);
+
         //设置布尔查询对象
         searchSourceBuilder.query(boolQueryBuilder);
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
+
         // 向搜索请求对象中设置搜索源
         searchRequest.source(searchSourceBuilder);
         // 执行搜索，向ES发起http请求
@@ -446,7 +463,7 @@ public class TestSearch {
         }
     }
 
-    // //布尔查询使用过虑器
+    // 布尔查询使用过虑器
     /*过虑是针对搜索的结果进行过虑，过虑器主要判断的是文档是否匹配，不去计算和判断文档的匹配度得分，所以过
     虑器性能比查询要高，且方便缓存，推荐尽量使用过虑器去实现查询或者过虑器和查询共同使用。*/
     @Test
@@ -457,6 +474,7 @@ public class TestSearch {
         searchRequest.types("doc");
         // 搜索源构建对象
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
         // 搜索方式
         // 先定义一个MultiMatchQuery
         // 提升boost，通常关键字匹配上name的权重要比匹配上description的权重高，这里可以对name的权重提升。
@@ -474,6 +492,71 @@ public class TestSearch {
         searchSourceBuilder.query(boolQueryBuilder);
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
+
+        // 向搜索请求对象中设置搜索源
+        searchRequest.source(searchSourceBuilder);
+        // 执行搜索，向ES发起http请求
+        SearchResponse searchResponse = client.search(searchRequest);
+        // 搜索结果
+        SearchHits hits = searchResponse.getHits();
+        // 匹配到的总记录数
+        long totalHits = hits.getTotalHits();
+        // 得到匹配度高的文档
+        SearchHit[] searchHits = hits.getHits();
+        // 日期格式化对象
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // 遍历匹配度高的文档
+        for (SearchHit hit : searchHits) {
+            // 文档所在的索引
+            String index = hit.getIndex();
+            // 文档所在的type类型
+            String type = hit.getType();
+            // 文档的主键
+            String id = hit.getId();
+            // 文档的匹配度得分
+            float score = hit.getScore();
+            String sourceAsString = hit.getSourceAsString();
+            // 源文档内容
+            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+            String name = (String) sourceAsMap.get("name");
+            // 由于上边设置了源文档字段过滤，这时description是取不到的
+            String description = (String) sourceAsMap.get("description");
+            // 学习模式
+            String studymodel = (String) sourceAsMap.get("studymodel");
+            // 价格
+            Double price = (Double) sourceAsMap.get("price");
+            // 日期
+            Date timestamp = dateFormat.parse((String) sourceAsMap.get("timestamp"));
+            System.out.println(name);
+            System.out.println(studymodel);
+            System.out.println(description);
+        }
+    }
+
+    // 排序
+    @Test
+    public void testSort() throws IOException, ParseException {
+        // 搜索请求对象
+        SearchRequest searchRequest = new SearchRequest("xc_course");
+        // 指定类型
+        searchRequest.types("doc");
+        // 搜索源构建对象
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+        // 搜索方式
+        // 定义BoolQuery布尔查询
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        // 定义过滤器
+        boolQueryBuilder.filter(QueryBuilders.rangeQuery("price").gte(0).lte(100));
+
+        // 设置布尔查询对象
+        searchSourceBuilder.query(boolQueryBuilder);
+        // 添加排序
+        searchSourceBuilder.sort(new FieldSortBuilder("studymodel").order(SortOrder.DESC));
+        searchSourceBuilder.sort(new FieldSortBuilder("price").order(SortOrder.ASC));
+        // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
+        searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
+
         // 向搜索请求对象中设置搜索源
         searchRequest.source(searchSourceBuilder);
         // 执行搜索，向ES发起http请求
