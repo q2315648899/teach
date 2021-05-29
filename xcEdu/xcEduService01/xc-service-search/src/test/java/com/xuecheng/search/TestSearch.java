@@ -4,7 +4,10 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -332,10 +335,75 @@ public class TestSearch {
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         // 搜索方式
         // MultiMatchQuery
-//        提升boost，通常关键字匹配上name的权重要比匹配上description的权重高，这里可以对name的权重提升。
+        // 提升boost，通常关键字匹配上name的权重要比匹配上description的权重高，这里可以对name的权重提升。
         searchSourceBuilder.query(QueryBuilders.multiMatchQuery("spring框架","name", "description")
                 .minimumShouldMatch("50%")
                 .field("name", 10));//提升boost权重,10倍
+        // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
+        searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
+        // 向搜索请求对象中设置搜索源
+        searchRequest.source(searchSourceBuilder);
+        // 执行搜索，向ES发起http请求
+        SearchResponse searchResponse = client.search(searchRequest);
+        // 搜索结果
+        SearchHits hits = searchResponse.getHits();
+        // 匹配到的总记录数
+        long totalHits = hits.getTotalHits();
+        // 得到匹配度高的文档
+        SearchHit[] searchHits = hits.getHits();
+        // 日期格式化对象
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // 遍历匹配度高的文档
+        for (SearchHit hit : searchHits) {
+            // 文档所在的索引
+            String index = hit.getIndex();
+            // 文档所在的type类型
+            String type = hit.getType();
+            // 文档的主键
+            String id = hit.getId();
+            // 文档的匹配度得分
+            float score = hit.getScore();
+            String sourceAsString = hit.getSourceAsString();
+            // 源文档内容
+            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+            String name = (String) sourceAsMap.get("name");
+            // 由于上边设置了源文档字段过滤，这时description是取不到的
+            String description = (String) sourceAsMap.get("description");
+            // 学习模式
+            String studymodel = (String) sourceAsMap.get("studymodel");
+            // 价格
+            Double price = (Double) sourceAsMap.get("price");
+            // 日期
+            Date timestamp = dateFormat.parse((String) sourceAsMap.get("timestamp"));
+            System.out.println(name);
+            System.out.println(studymodel);
+            System.out.println(description);
+        }
+    }
+
+    // BoolQuery，将搜索关键字分词，拿分词去索引库搜索
+    @Test
+    public void testBoolQuery() throws IOException, ParseException {
+        // 搜索请求对象
+        SearchRequest searchRequest = new SearchRequest("xc_course");
+        // 指定类型
+        searchRequest.types("doc");
+        // 搜索源构建对象
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        // 搜索方式
+        // 先定义一个MultiMatchQuery
+        // 提升boost，通常关键字匹配上name的权重要比匹配上description的权重高，这里可以对name的权重提升。
+        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery("spring框架", "name", "description")
+                .minimumShouldMatch("50%")
+                .field("name", 10);//提升boost权重,10倍
+        // 再定义一个TermQuery
+        TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("studymodel", "201001");
+        // 定义BoolQuery布尔查询
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        boolQueryBuilder.must(multiMatchQueryBuilder);
+        boolQueryBuilder.must(termQueryBuilder);
+        //设置布尔查询对象
+        searchSourceBuilder.query(boolQueryBuilder);
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
         // 向搜索请求对象中设置搜索源
