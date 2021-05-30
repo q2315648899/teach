@@ -65,7 +65,19 @@ public class EsCourseService {
             boolQueryBuilder.must(multiMatchQueryBuilder);
         }
         // 根据‘分类’搜索
-        //...
+        // 定义过滤器
+        if(StringUtils.isNotEmpty(courseSearchParam.getMt())){
+            // 根据一级分类
+            boolQueryBuilder.filter(QueryBuilders.termQuery("mt",courseSearchParam.getMt()));
+        }
+        if(StringUtils.isNotEmpty(courseSearchParam.getSt())){
+            // 根据二级分类
+            boolQueryBuilder.filter(QueryBuilders.termQuery("st",courseSearchParam.getSt()));
+        }
+        if(StringUtils.isNotEmpty(courseSearchParam.getGrade())){
+            // 根据难度等级
+            boolQueryBuilder.filter(QueryBuilders.termQuery("grade",courseSearchParam.getGrade()));
+        }
 
         // 设置布尔查询对象
         searchSourceBuilder.query(boolQueryBuilder);
