@@ -4,6 +4,7 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.text.Text;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -11,6 +12,8 @@ import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.FieldSortBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.junit.Test;
@@ -174,7 +177,7 @@ public class TestSearch {
 
         // 搜索方式
         // 设置Term Query查询
-        searchSourceBuilder.query(QueryBuilders.termQuery("name","spring开发"));
+        searchSourceBuilder.query(QueryBuilders.termQuery("name", "spring开发"));
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
 
@@ -231,7 +234,7 @@ public class TestSearch {
         // 搜索方式
         // 根据id查询
         // 定义查询的id
-        String[] split = new String[]{"1","2"};
+        String[] split = new String[]{"1", "2"};
         List<String> idList = Arrays.asList(split);
         searchSourceBuilder.query(QueryBuilders.termsQuery("_id", idList));
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
@@ -349,7 +352,7 @@ public class TestSearch {
         // 搜索方式
         // MultiMatchQuery
         // 提升boost，通常关键字匹配上name的权重要比匹配上description的权重高，这里可以对name的权重提升。
-        searchSourceBuilder.query(QueryBuilders.multiMatchQuery("spring框架","name", "description")
+        searchSourceBuilder.query(QueryBuilders.multiMatchQuery("spring框架", "name", "description")
                 .minimumShouldMatch("50%")
                 .field("name", 10));//提升boost权重,10倍
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
@@ -534,6 +537,7 @@ public class TestSearch {
     }
 
     // 排序
+    // 对结果进行排序.可以在字段上添加一个或多个排序，支持在keyword、date、float等类型上添加，text类型的字段上不允许添加排序。
     @Test
     public void testSort() throws IOException, ParseException {
         // 搜索请求对象
@@ -597,4 +601,94 @@ public class TestSearch {
         }
     }
 
+    // Highlight
+    @Test
+    public void testHighlight() throws IOException, ParseException {
+        // 搜索请求对象
+        SearchRequest searchRequest = new SearchRequest("xc_course");
+        // 指定类型
+        searchRequest.types("doc");
+        // 搜索源构建对象
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+
+        // 搜索方式
+        // 先定义一个MultiMatchQuery
+        // 提升boost，通常关键字匹配上name的权重要比匹配上description的权重高，这里可以对name的权重提升。
+        MultiMatchQueryBuilder multiMatchQueryBuilder = QueryBuilders.multiMatchQuery("开发框架", "name", "description")
+                .minimumShouldMatch("50%")
+                .field("name", 10);//提升boost权重,10倍
+        // 定义BoolQuery布尔查询
+        BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
+        boolQueryBuilder.must(multiMatchQueryBuilder);
+        // 定义过滤器
+        boolQueryBuilder.filter(QueryBuilders.rangeQuery("price").gte(0).lte(100));
+
+        // 设置布尔查询对象
+        searchSourceBuilder.query(boolQueryBuilder);
+        // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
+        searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});
+
+        // 高亮设置
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.preTags("<tag>");//设置前缀
+        highlightBuilder.postTags("</tag>");//设置后缀
+        // 设置高亮字段
+        highlightBuilder.fields().add(new HighlightBuilder.Field("name"));
+        // highlightBuilder.fields().add(new HighlightBuilder.Field("description"));
+        searchSourceBuilder.highlighter(highlightBuilder);
+
+        // 向搜索请求对象中设置搜索源
+        searchRequest.source(searchSourceBuilder);
+        // 执行搜索，向ES发起http请求
+        SearchResponse searchResponse = client.search(searchRequest);
+        // 搜索结果
+        SearchHits hits = searchResponse.getHits();
+        // 匹配到的总记录数
+        long totalHits = hits.getTotalHits();
+        // 得到匹配度高的文档
+        SearchHit[] searchHits = hits.getHits();
+        // 日期格式化对象
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        // 遍历匹配度高的文档
+        for (SearchHit hit : searchHits) {
+            // 文档所在的索引
+            String index = hit.getIndex();
+            // 文档所在的type类型
+            String type = hit.getType();
+            // 文档的主键
+            String id = hit.getId();
+            // 文档的匹配度得分
+            float score = hit.getScore();
+            String sourceAsString = hit.getSourceAsString();
+            // 源文档内容
+            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+            String name = (String) sourceAsMap.get("name");
+
+            //取出高亮字段内容
+            Map<String, HighlightField> highlightFields = hit.getHighlightFields();
+            if(highlightFields!=null){
+                HighlightField nameField = highlightFields.get("name");
+                if(nameField!=null){
+                    Text[] fragments = nameField.getFragments();
+                    StringBuffer stringBuffer = new StringBuffer();
+                    for (Text str : fragments) {
+                        stringBuffer.append(str.string());
+                    }
+                    name = stringBuffer.toString();
+                }
+            }
+
+            // 由于上边设置了源文档字段过滤，这时description是取不到的
+            String description = (String) sourceAsMap.get("description");
+            // 学习模式
+            String studymodel = (String) sourceAsMap.get("studymodel");
+            // 价格
+            Double price = (Double) sourceAsMap.get("price");
+            // 日期
+            Date timestamp = dateFormat.parse((String) sourceAsMap.get("timestamp"));
+            System.out.println(name);
+            System.out.println(studymodel);
+            System.out.println(description);
+        }
+    }
 }
