@@ -416,7 +416,7 @@ public class TestSearch {
                 .field("name", 10);//提升boost权重,10倍
         // 再定义一个TermQuery
         TermQueryBuilder termQueryBuilder = QueryBuilders.termQuery("studymodel", "201001");
-        // 定义BoolQuery布尔查询
+        // 定义BoolQuery布尔查询（同时有多个查询类型时需要）
         BoolQueryBuilder boolQueryBuilder = QueryBuilders.boolQuery();
         boolQueryBuilder.must(multiMatchQueryBuilder);
         boolQueryBuilder.must(termQueryBuilder);
