@@ -130,7 +130,7 @@ public class TestSearch {
         SearchResponse searchResponse = client.search(searchRequest);
         // 搜索结果
         SearchHits hits = searchResponse.getHits();
-        // 匹配到的总记录数(不算分页参数的查询结果)
+        // 匹配到的总记录数(除掉分页时，查到的所有查询结果)
         long totalHits = hits.getTotalHits();
         // 得到匹配度高的文档
         SearchHit[] searchHits = hits.getHits();

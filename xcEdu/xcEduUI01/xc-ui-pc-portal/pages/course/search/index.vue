@@ -149,6 +149,7 @@
               @current-change="handleCurrentChange"
               :total="total"
               :page-size="page_size"
+              :current-page="page"
               prev-text="上一页"
               next-text="下一页">
             </el-pagination>
@@ -287,7 +288,7 @@
         imgUrl: config.imgUrl,
         total: 0,//总记录数
         page: 1,//页码
-        page_size: 12//每页显示个数
+        page_size: 2//每页显示个数
       }
     },
     watch: {//路由发生变化立即搜索search表示search方法
@@ -296,7 +297,11 @@
     methods: {
       //分页触发
       handleCurrentChange(page) {
-
+        // 当前页码
+        this.page = page
+        this.$route.query.page = page
+        let querys = querystring.stringify(this.$route.query)
+        window.location = '/course/search?'+querys;
       },
       search() {
         //刷新当前页面

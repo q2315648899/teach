@@ -81,6 +81,17 @@ public class EsCourseService {
 
         // 设置布尔查询对象
         searchSourceBuilder.query(boolQueryBuilder);
+        // 设置分页参数
+        if (page <= 0) {
+            page = 1;
+        }
+        if (size <= 0) {
+            size = 12;
+        }
+        // 计算出起始下标
+        int from = (page - 1) * size;
+        searchSourceBuilder.from(from); // 分页查询，设置起始下标，从0开始
+        searchSourceBuilder.size(size);// 每页显示个数
         // 向搜索请求对象中设置搜索源
         searchRequest.source(searchSourceBuilder);
 

@@ -26,7 +26,7 @@ public class EsCourseController implements EsCourseControllerApi {
     // 课程搜索
     @Override
     @GetMapping(value="/list/{page}/{size}")
-    public QueryResponseResult<CoursePub> list(@PathVariable(name = "page") int page, @PathVariable(name = "page") int size,
+    public QueryResponseResult<CoursePub> list(@PathVariable(name = "page") int page, @PathVariable(name = "size") int size,
                                                CourseSearchParam courseSearchParam) throws IOException {
         return esCourseService.list(page, size, courseSearchParam);
     }
