@@ -6,13 +6,29 @@
 <script>
   export default {
     layout: "test",
-    asyncData() {
+    async asyncData() {
       console.log("请求服务端接口...")
       // alert(0) 无法在服务端运行
       // 请求服务端接口...
+
+      // 先调用a方法
+      var a = await new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          console.log("1")
+          resolve(1)
+        },2000)
+      });
+      // 再调用b方法
+      var b = await new Promise(function (resolve, reject) {
+        setTimeout(function () {
+          console.log("2")
+          resolve(2)
+        },1000)
+      });
+
       return {
-        name:'黑马程序员'
-      }
+        name: '黑马程序员'
+      };
     },
     data() {
       return {
@@ -24,12 +40,36 @@
       getUser: function () {
         // ajax请求服务的接口
         this.name = "传智博客"
+      },
+      a() {
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            resolve(1)
+          }, 1000)
+        })
+      },
+      b() {
+        return new Promise(function (resolve, reject) {
+          setTimeout(function () {
+            resolve(2)
+          }, 2000)
+        })
       }
+
     },
     mounted() {
+      //从请求中获取参数
       this.id = this.$route.params.id;
       console.log(this.id)
       // this.getUser()
+
+      //先执行b方法，后执行a方法，执行结果为a方法先执行(并没有按照方法执行的顺序输出,使用promise实现了异步调用)
+      // this.b().then(res => {
+      //   alert(res)
+      // });
+      // this.a().then(res => {
+      //   alert(res)
+      // });
     }
   }
 
