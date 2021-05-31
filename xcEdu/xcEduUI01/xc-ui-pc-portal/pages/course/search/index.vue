@@ -7,7 +7,8 @@
           <ol>
             <li>{{keyword}}
 
-              <nuxt-link v-if="keyword" class="title-link" :to="'/course/search?keyword=&mt='+mt+'&st=' + st+'&grade='+grade">
+              <nuxt-link v-if="keyword" class="title-link"
+                         :to="'/course/search?keyword=&mt='+mt+'&st=' + st+'&grade='+grade">
                 &Chi;
               </nuxt-link>
             </li>
@@ -15,12 +16,18 @@
         </ul>
         <ul>
           <li>一级分类：</li>
-          <li v-if="mt!=''"><nuxt-link  class="title-link" :to="'/course/search?keyword='+keyword+'&grade='+grade">全部</nuxt-link></li>
+          <li v-if="mt!=''">
+            <nuxt-link class="title-link" :to="'/course/search?keyword='+keyword+'&grade='+grade">全部</nuxt-link>
+          </li>
           <li class="all" v-else>全部</li>
           <ol>
             <li v-for="category_v in first_category">
-              <nuxt-link  class="title-link all" :to="'/course/search?keyword='+keyword+'&mt=' + category_v.id" v-if="category_v.id == mt">{{category_v.name}}</nuxt-link>
-              <nuxt-link  class="title-link" :to="'/course/search?keyword='+keyword+'&mt=' + category_v.id" v-else>{{category_v.name}}</nuxt-link>
+              <nuxt-link class="title-link all" :to="'/course/search?keyword='+keyword+'&mt=' + category_v.id"
+                         v-if="category_v.id == mt">{{category_v.name}}
+              </nuxt-link>
+              <nuxt-link class="title-link" :to="'/course/search?keyword='+keyword+'&mt=' + category_v.id" v-else>
+                {{category_v.name}}
+              </nuxt-link>
             </li>
           </ol>
           <!--<ol>
@@ -31,12 +38,19 @@
         </ul>
         <ul>
           <li>二级分类：</li>
-          <li v-if="st!=''"><nuxt-link  class="title-link" :to="'/course/search?keyword='+keyword+'&mt='+mt+'&grade='+grade">全部</nuxt-link></li>
+          <li v-if="st!=''">
+            <nuxt-link class="title-link" :to="'/course/search?keyword='+keyword+'&mt='+mt+'&grade='+grade">全部
+            </nuxt-link>
+          </li>
           <li class="all" v-else>全部</li>
           <ol v-if="second_category.length>0">
             <li v-for="category_v in second_category">
-              <nuxt-link  class="title-link all" :to="'/course/search?keyword='+keyword+'&mt='+mt+'&st=' + category_v.id" v-if="category_v.id == st">{{category_v.name}}</nuxt-link>
-              <nuxt-link  class="title-link" :to="'/course/search?keyword='+keyword+'&mt='+mt+'&st=' + category_v.id" v-else>{{category_v.name}}</nuxt-link>
+              <nuxt-link class="title-link all" :to="'/course/search?keyword='+keyword+'&mt='+mt+'&st=' + category_v.id"
+                         v-if="category_v.id == st">{{category_v.name}}
+              </nuxt-link>
+              <nuxt-link class="title-link" :to="'/course/search?keyword='+keyword+'&mt='+mt+'&st=' + category_v.id"
+                         v-else>{{category_v.name}}
+              </nuxt-link>
             </li>
             <!-- <li>大数据</li>
              <li>云计算</li>-->
@@ -46,17 +60,29 @@
         <ul>
           <li>难度等级：</li>
           <li v-if="grade!=''">
-            <nuxt-link  class="title-link" :to="'/course/search?keyword='+keyword+'&mt=' + mt+'&st='+st+'&grade='">全部
+            <nuxt-link class="title-link" :to="'/course/search?keyword='+keyword+'&mt=' + mt+'&st='+st+'&grade='">全部
             </nuxt-link>
           </li>
           <li class="all" v-else>全部</li>
           <ol>
             <li v-if="grade=='200001'" class="all">初级</li>
-            <li v-else><nuxt-link  class="title-link" :to="'/course/search?keyword='+keyword+'&mt=' + mt+'&st='+st+'&grade=200001'">初级</nuxt-link></li>
+            <li v-else>
+              <nuxt-link class="title-link"
+                         :to="'/course/search?keyword='+keyword+'&mt=' + mt+'&st='+st+'&grade=200001'">初级
+              </nuxt-link>
+            </li>
             <li v-if="grade=='200002'" class="all">中级</li>
-            <li v-else><nuxt-link  class="title-link" :to="'/course/search?keyword='+keyword+'&mt=' + mt+'&st='+st+'&grade=200002'">中级</nuxt-link></li>
+            <li v-else>
+              <nuxt-link class="title-link"
+                         :to="'/course/search?keyword='+keyword+'&mt=' + mt+'&st='+st+'&grade=200002'">中级
+              </nuxt-link>
+            </li>
             <li v-if="grade=='200003'" class="all">高级</li>
-            <li v-else><nuxt-link  class="title-link" :to="'/course/search?keyword='+keyword+'&mt=' + mt+'&st='+st+'&grade=200003'">高级</nuxt-link></li>
+            <li v-else>
+              <nuxt-link class="title-link"
+                         :to="'/course/search?keyword='+keyword+'&mt=' + mt+'&st='+st+'&grade=200003'">高级
+              </nuxt-link>
+            </li>
           </ol>
         </ul>
       </div>
@@ -100,9 +126,10 @@
                     <div v-else>
                       <p><img src="/img/widget-demo1.png" width="100%" alt=""></p>
                     </div>
-                    <ul >
+                    <ul>
                       <li class="course_title"><span v-html="course.name"></span></li>
-                      <li style="float: left"><span v-if="course.charge == '203001'">免费</span><span v-if="course.charge == '203002'">￥{{course.price | money}}</span>
+                      <li style="float: left"><span v-if="course.charge == '203001'">免费</span><span
+                        v-if="course.charge == '203002'">￥{{course.price | money}}</span>
                         <!-- <em> · </em>-->&nbsp;&nbsp;<!--<em>1125人在学习</em>--></li>
                     </ul>
                     <!--</a>-->
@@ -169,13 +196,17 @@
   let config = require('~/config/sysConfig')
   import querystring from 'querystring'
   import * as courseApi from '~/api/course'
+
   export default {
     head() {
       return {
         title: '传智播客-一样的教育,不一样的品质',
         meta: [
           {charset: 'utf-8'},
-          {name: 'description', content: '传智播客专注IT培训,Java培训,Android培训,安卓培训,PHP培训,C++培训,网页设计培训,平面设计培训,UI设计培训,移动开发培训,网络营销培训,web前端培训,云计算大数据培训,全栈工程师培训,产品经理培训。'},
+          {
+            name: 'description',
+            content: '传智播客专注IT培训,Java培训,Android培训,安卓培训,PHP培训,C++培训,网页设计培训,平面设计培训,UI设计培训,移动开发培训,网络营销培训,web前端培训,云计算大数据培训,全栈工程师培训,产品经理培训。'
+          },
           {name: 'keywords', content: this.keywords}
         ],
         link: [
@@ -185,49 +216,94 @@
         ]
       }
     },
-    async asyncData({ store, route }) {//服务端调用方法
+    async asyncData({store, route}) {//服务端调用方法,在组件加载之前调用，有利于SEO
+      // 搜索课程
+      // 当前页码
+      let page = route.query.page;
+      if(!page){
+        page = 1;
+      }else{
+        page = Number.parseInt(page)
+      }
+      console.log(page);
+      // 向java微服务发起请求搜索课程
+      //请求搜索服务，搜索服务
+      let course_data = await courseApi.search_course(page, 2, route.query);
+      if (course_data && course_data.queryResult ) {
+        let keywords = ''
+        let mt=''
+        let st=''
+        let grade=''
+        let keyword=''
+        let total = course_data.queryResult.total
+        if( route.query.mt){
+          mt = route.query.mt
+        }
+        if( route.query.st){
+          st = route.query.st
+        }
+        if( route.query.grade){
+          grade = route.query.grade
+        }
+        if( route.query.keyword){
+          keyword = route.query.keyword
+        }
+        return {
+          courselist: course_data.queryResult.list,//课程列表
+          keywords:keywords,
+          mt:mt,
+          st:st,
+          grade:grade,
+          keyword:keyword,
+          page:page,
+          total:total,
+          imgUrl:config.imgUrl
+        }
+      }else{
+        return {
+          courselist: {},
+          first_category:{},
+          second_category:{},
+          mt:'',
+          st:'',
+          grade:'',
+          keyword:'',
+          page:page,
+          total:0,
+          imgUrl:config.imgUrl
+        }
+      }
+
+    },
+    data() {
       return {
         courselist: {},
-        first_category:{},
-        second_category:{},
-        mt:'',
-        st:'',
-        grade:'',
-        keyword:'',
-        page:1,
-        total:0,
-        imgUrl:config.imgUrl
+        first_category: {},
+        second_category: {},
+        mt: '',
+        st: '',
+        grade: '',
+        keyword: '',
+        imgUrl: config.imgUrl,
+        total: 0,//总记录数
+        page: 1,//页码
+        page_size: 12//每页显示个数
       }
     },
-    data(){
-      return {
-        courselist: {},
-        first_category:{},
-        second_category:{},
-        mt:'',
-        st:'',
-        grade:'',
-        keyword:'',
-        imgUrl:config.imgUrl,
-        total:0,//总记录数
-        page:1,//页码
-        page_size:12//每页显示个数
-      }
+    watch: {//路由发生变化立即搜索search表示search方法
+      '$route': 'search'
     },
-    watch:{//路由发生变化立即搜索search表示search方法
-      '$route':'search'
-    },
-    methods:{
+    methods: {
       //分页触发
       handleCurrentChange(page) {
 
       },
-      search(){
+      search() {
         //刷新当前页面
         window.location.reload();
       }
     },
-    mounted(){
+    mounted() {
 
     }
   }
@@ -236,30 +312,38 @@
   a {
     color: #000;
   }
+
   .el-icon-arrow-left:before {
     content: "<";
   }
+
   .el-icon-d-arrow-left:before {
     content: "...";
   }
+
   .el-icon-arrow-right:before {
     content: ">";
   }
+
   .el-icon-d-arrow-right:before {
     content: "...";
   }
+
   .el-icon-more:before {
     content: "...";
   }
+
   .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
     background-color: #fff;
   }
-  .course_title{
+
+  .course_title {
     height: 20px;
     width: 160px;
-    overflow:hidden;
+    overflow: hidden;
   }
-  .eslight{
+
+  .eslight {
     color: #990000;
   }
 </style>
