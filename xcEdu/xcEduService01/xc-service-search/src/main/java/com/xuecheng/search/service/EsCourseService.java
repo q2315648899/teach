@@ -9,12 +9,15 @@ import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.text.Text;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -66,17 +69,17 @@ public class EsCourseService {
         }
         // 根据‘分类’搜索
         // 定义过滤器
-        if(StringUtils.isNotEmpty(courseSearchParam.getMt())){
+        if (StringUtils.isNotEmpty(courseSearchParam.getMt())) {
             // 根据一级分类
-            boolQueryBuilder.filter(QueryBuilders.termQuery("mt",courseSearchParam.getMt()));
+            boolQueryBuilder.filter(QueryBuilders.termQuery("mt", courseSearchParam.getMt()));
         }
-        if(StringUtils.isNotEmpty(courseSearchParam.getSt())){
+        if (StringUtils.isNotEmpty(courseSearchParam.getSt())) {
             // 根据二级分类
-            boolQueryBuilder.filter(QueryBuilders.termQuery("st",courseSearchParam.getSt()));
+            boolQueryBuilder.filter(QueryBuilders.termQuery("st", courseSearchParam.getSt()));
         }
-        if(StringUtils.isNotEmpty(courseSearchParam.getGrade())){
+        if (StringUtils.isNotEmpty(courseSearchParam.getGrade())) {
             // 根据难度等级
-            boolQueryBuilder.filter(QueryBuilders.termQuery("grade",courseSearchParam.getGrade()));
+            boolQueryBuilder.filter(QueryBuilders.termQuery("grade", courseSearchParam.getGrade()));
         }
 
         // 设置布尔查询对象
@@ -92,6 +95,15 @@ public class EsCourseService {
         int from = (page - 1) * size;
         searchSourceBuilder.from(from); // 分页查询，设置起始下标，从0开始
         searchSourceBuilder.size(size);// 每页显示个数
+
+        // 高亮设置
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        highlightBuilder.preTags("<font class='eslight'>");//设置前缀
+        highlightBuilder.postTags("</font>");//设置后缀
+        // 设置高亮字段
+        highlightBuilder.fields().add(new HighlightBuilder.Field("name"));
+        searchSourceBuilder.highlighter(highlightBuilder);
+
         // 向搜索请求对象中设置搜索源
         searchRequest.source(searchSourceBuilder);
 
@@ -111,8 +123,26 @@ public class EsCourseService {
                 CoursePub coursePub = new CoursePub();
                 // 源文档
                 Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+                // 取出id
+                String id = (String) sourceAsMap.get("id");
+                coursePub.setId(id);
                 // 取出name
                 String name = (String) sourceAsMap.get("name");
+
+                //取出高亮字段内容
+                Map<String, HighlightField> highlightFields = hit.getHighlightFields();
+                if(highlightFields!=null){
+                    HighlightField nameField = highlightFields.get("name");
+                    if(nameField!=null){
+                        Text[] fragments = nameField.getFragments();
+                        StringBuffer stringBuffer = new StringBuffer();
+                        for (Text str : fragments) {
+                            stringBuffer.append(str.string());
+                        }
+                        name = stringBuffer.toString();
+                    }
+                }
+
                 coursePub.setName(name);
                 // 取出图片
                 String pic = (String) sourceAsMap.get("pic");
