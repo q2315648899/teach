@@ -221,57 +221,77 @@
       // 搜索课程
       // 当前页码
       let page = route.query.page;
-      if(!page){
+      if (!page) {
         page = 1;
-      }else{
+      } else {
         page = Number.parseInt(page)
       }
       console.log(page);
       // 向java微服务发起请求搜索课程
       //请求搜索服务，搜索服务
       let course_data = await courseApi.search_course(page, 2, route.query);
-      if (course_data && course_data.queryResult ) {
+      //查询分类
+      let category_data = await courseApi.sysres_category()
+      if (course_data && course_data.queryResult) {
+        //全部分类
+        let category = category_data.category//全部分类
+        let first_category = category[0].children//一级分类
+        let second_category=[]//二级分类
+
         let keywords = ''
-        let mt=''
-        let st=''
-        let grade=''
-        let keyword=''
+        let mt = ''
+        let st = ''
+        let grade = ''
+        let keyword = ''
         let total = course_data.queryResult.total
-        if( route.query.mt){
+        if (route.query.mt) {
           mt = route.query.mt
         }
-        if( route.query.st){
+        if (route.query.st) {
           st = route.query.st
         }
-        if( route.query.grade){
+        if (route.query.grade) {
           grade = route.query.grade
         }
-        if( route.query.keyword){
+        if (route.query.keyword) {
           keyword = route.query.keyword
         }
+        //遍历一级分类
+        for (var i in first_category) {
+          keywords += first_category[i].name + ' '
+          if (mt != '' && mt == first_category[i].id) {
+            //取出二级分类
+            second_category = first_category[i].children;
+            // console.log(second_category)
+            break;
+          }
+        }
+
         return {
           courselist: course_data.queryResult.list,//课程列表
-          keywords:keywords,
-          mt:mt,
-          st:st,
-          grade:grade,
-          keyword:keyword,
-          page:page,
-          total:total,
-          imgUrl:config.imgUrl
+          keywords: keywords,
+          first_category: first_category,
+          second_category: second_category,
+          mt: mt,
+          st: st,
+          grade: grade,
+          keyword: keyword,
+          page: page,
+          total: total,
+          imgUrl: config.imgUrl
         }
-      }else{
+      } else {
         return {
           courselist: {},
-          first_category:{},
-          second_category:{},
-          mt:'',
-          st:'',
-          grade:'',
-          keyword:'',
-          page:page,
-          total:0,
-          imgUrl:config.imgUrl
+          first_category: {},
+          second_category: {},
+          mt: '',
+          st: '',
+          grade: '',
+          keyword: '',
+          page: page,
+          total: 0,
+          imgUrl: config.imgUrl
         }
       }
 
@@ -301,7 +321,7 @@
         this.page = page
         this.$route.query.page = page
         let querys = querystring.stringify(this.$route.query)
-        window.location = '/course/search?'+querys;
+        window.location = '/course/search?' + querys;
       },
       search() {
         //刷新当前页面
