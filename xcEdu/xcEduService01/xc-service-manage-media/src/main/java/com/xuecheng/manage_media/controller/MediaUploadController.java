@@ -43,7 +43,7 @@ public class MediaUploadController implements MediaUploadControllerApi {
     public ResponseResult uploadchunk(@RequestParam("file") MultipartFile file,
                                       @RequestParam("fileMd5") String fileMd5,
                                       @RequestParam("chunk") Integer chunk) {
-        return null;
+        return mediaUploadService.uploadchunk(file, fileMd5, chunk);
     }
 
     @Override

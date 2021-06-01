@@ -8,13 +8,18 @@ import com.xuecheng.framework.model.response.CommonCode;
 import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_media.controller.MediaUploadController;
 import com.xuecheng.manage_media.dao.MediaFileRepository;
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
 
 /**
@@ -122,5 +127,60 @@ public class MediaUploadService {
     private String getChunkFileFolderPath(String fileMd5) {
         String fileChunkFolderPath = getFileFolderPath(fileMd5) + "/" + "chunks" + "/";
         return fileChunkFolderPath;
+    }
+
+
+    // 上传分块
+    public ResponseResult uploadchunk(MultipartFile file, String fileMd5, Integer chunk) {
+        if(file == null){
+            ExceptionCast.cast(MediaCode.UPLOAD_FILE_REGISTER_ISNULL);
+        }
+        // 检查分块目录，如果不存在则要创建
+        // 创建分块目录
+        boolean fileFold = this.createChunkFileFolder(fileMd5);
+        if (!fileFold) {
+            // 分块文件目录创建失败
+            ExceptionCast.cast(MediaCode.CHUNK_FILE_CREATEFOLDER_FAIL);
+        }
+        // 得到块文件对象
+        File chunkFile = new File(getChunkFileFolderPath(fileMd5) + chunk);
+        //上传的块文件
+        InputStream inputStream= null;
+        FileOutputStream outputStream = null;
+        try {
+            inputStream = file.getInputStream();
+            outputStream = new FileOutputStream(chunkFile);
+            IOUtils.copy(inputStream,outputStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+            LOGGER.error("upload chunk file fail:{}",e.getMessage());
+            ExceptionCast.cast(MediaCode.CHUNK_FILE_UPLOAD_FAIL);
+        }finally {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            try {
+                outputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return new ResponseResult(CommonCode.SUCCESS);
+    }
+
+    //创建块文件目录
+    private boolean createChunkFileFolder(String fileMd5) {
+        //创建上传文件目录
+        String chunkFileFolderPath = getChunkFileFolderPath(fileMd5);
+        File chunkFileFolder = new File(chunkFileFolderPath);
+        if (!chunkFileFolder.exists()) {
+            //创建文件夹
+            boolean mkdirs = chunkFileFolder.mkdirs();
+            return mkdirs;
+        }
+        return true;
     }
 }
