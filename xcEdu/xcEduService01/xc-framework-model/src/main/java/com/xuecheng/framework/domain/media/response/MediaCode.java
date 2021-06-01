@@ -19,7 +19,8 @@ public enum MediaCode implements ResultCode {
     UPLOAD_FILE_REGISTER_CREATEFOLDER_FAIL(false,22006,"上传文件的目录创建失败！"),
     CHUNK_FILE_CREATEFOLDER_FAIL(false,22007,"分块文件的目录创建失败！"),
     CHUNK_FILE_UPLOAD_FAIL(false,22008,"分块文件上传失败！"),
-    UPLOAD_FILE_REGISTER_ISNULL(false,22009,"上传文件不存在，请重新选择！");
+    UPLOAD_FILE_REGISTER_ISNULL(false,22009,"上传文件不存在，请重新选择！"),
+    MERGE_FILE_CREATEFAIL(false,22010,"合并文件创建失败！");
 
     //操作代码
     @ApiModelProperty(value = "媒资系统操作是否成功", example = "true", required = true)
