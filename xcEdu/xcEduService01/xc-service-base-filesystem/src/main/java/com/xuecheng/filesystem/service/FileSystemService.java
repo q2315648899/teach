@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Map;
 
 /**
+ * 文件系统管理
+ *
  * Create by wong on 2021/5/27
  */
 @Service
@@ -34,7 +36,7 @@ public class FileSystemService {
     @Autowired
     FileSystemRepository fileSystemRepository;
 
-    // 上传文件
+    // 上传文件到FastDFS
     public UploadFileResult upload(MultipartFile multipartFile,
                                    String filetag,
                                    String businesskey,
@@ -42,7 +44,7 @@ public class FileSystemService {
         if (multipartFile == null) {
             ExceptionCast.cast(FileSystemCode.FS_UPLOADFILE_FILEISNULL);
         }
-        // 第一步：将文件上传到fdfs，得到一个文件id
+        // 第一步：将文件上传到FastDFS，得到一个文件id
         String fileId = fdfs_upload(multipartFile);
         if (StringUtils.isEmpty(fileId)) {
             ExceptionCast.cast(FileSystemCode.FS_UPLOADFILE_SERVERFAIL);
@@ -76,13 +78,13 @@ public class FileSystemService {
         return new UploadFileResult(CommonCode.SUCCESS, fileSystem);
     }
 
-    // 上传文件到fdfs，返回文件Id
+    // 上传文件到FastDFS，返回文件Id
     /**
      * @param multipartFile 文件
      * @return 文件id
      */
     private String fdfs_upload(MultipartFile multipartFile) {
-        // 初始化fsstdfs的环境
+        // 初始化FastDFS的环境
         initFdfsConfig();
         // 创建定义TrackerClient
         TrackerClient trackerClient = new TrackerClient();
@@ -98,10 +100,10 @@ public class FileSystemService {
             byte[] bytes = multipartFile.getBytes();
             //文件原始名称
             String originalFilename = multipartFile.getOriginalFilename();
-            //文件扩展名
+            //文件扩展名，如:jpg,png
             String extName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
             // 上传成功后拿到文件Id
-            String fileId = storageClient1.upload_file1(bytes, "png", null);
+            String fileId = storageClient1.upload_file1(bytes, extName, null);
             return fileId;
         } catch (Exception e) {
             e.printStackTrace();
