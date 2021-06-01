@@ -16,5 +16,10 @@ spring:
 xuecheng:
   mq:
   #cms客户端监控的队列名称（不同的客户端监控的队列不能重复）
+  #1、平台包括多个站点，页面归属不同的站点。
+  #2、发布一个页面应将该页面发布到所属站点的服务器上。
+  #3、每个站点服务部署cms client程序，并与交换机绑定，绑定时指定站点Id为routingKey。
+  #指定站点id为routingKey就可以实现cms client只能接收到所属站点的页面发布消息。
+  #4、页面发布程序向MQ发布消息时指定页面所属站点Id为routingKey，将该页面发布到它所在服务器上的cms client。
     queue: queue_cms_postpage_03
-    routingKey: 60b0bfc35089c31ccc96fb16 #此routingKey为门户站点ID
+    routingKey: 60b0bfc35089c31ccc96fb16 #比如把该cms client工程部署到学习中心服务器上，此routingKey就设置为学习中心站点ID

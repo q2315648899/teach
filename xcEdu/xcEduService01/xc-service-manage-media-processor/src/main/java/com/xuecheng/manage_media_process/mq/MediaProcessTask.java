@@ -26,7 +26,7 @@ public class MediaProcessTask {
     @Value("${xc-service-manage-media.ffmpeg-path}")
     String ffmpeg_path;
     //上传文件根目录
-    @Value("${xc-service-manage-media.upload-location}")
+    @Value("${xc-service-manage-media.video-location}")
     String serverPath;
 
     @Autowired
