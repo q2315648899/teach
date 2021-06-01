@@ -26,8 +26,8 @@ public interface MediaUploadControllerApi {
 
     @ApiOperation("上传分块")
     public ResponseResult uploadchunk(MultipartFile file,
-                                      Integer chunk,
-                                      String fileMd5);
+                                      String fileMd5,
+                                      Integer chunk);
 
     @ApiOperation("合并文件")
     public ResponseResult mergechunks(String fileMd5,
