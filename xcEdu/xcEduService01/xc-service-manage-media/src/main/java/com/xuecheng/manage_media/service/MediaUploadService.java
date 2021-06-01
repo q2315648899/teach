@@ -124,7 +124,7 @@ public class MediaUploadService {
 
     // 得到分块文件所在目录
     private String getChunkFileFolderPath(String fileMd5) {
-        String fileChunkFolderPath = getFileFolderPath(fileMd5) + "/" + "chunks" + "/";
+        String fileChunkFolderPath = getFileFolderPath(fileMd5) + "chunks" + "/";
         return fileChunkFolderPath;
     }
 
