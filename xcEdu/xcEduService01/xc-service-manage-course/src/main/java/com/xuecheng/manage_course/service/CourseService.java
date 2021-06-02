@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -62,6 +63,9 @@ public class CourseService {
 
     @Autowired
     TeachplanMediaRepository teachplanMediaRepository;
+
+    @Autowired
+    TeachplanMediaPubRepository teachplanMediaPubRepository;
 
     @Autowired
     CmsPageClient cmsPageClient;
@@ -427,9 +431,10 @@ public class CourseService {
             ExceptionCast.cast(CourseCode.COURSE_PUBLISH_CREATE_INDEX_ERROR);
         }
         // 课程缓存...
-
         // 页面url
         String pageUrl = cmsPostPageResult.getPageUrl();
+        //保存课程计划媒资信息到TeachplanMediaPub表
+        saveTeachplanMediaPub(courseId);
         return new CoursePublishResult(CommonCode.SUCCESS, pageUrl);
     }
 
@@ -505,6 +510,25 @@ public class CourseService {
         coursePubRepository.save(coursePubNew);
         return coursePubNew;
     }
+
+    //保存课程计划媒资信息
+    private void saveTeachplanMediaPub(String courseId) {
+        //从TeachplanMedia中查询课程媒资信息
+        List<TeachplanMedia> teachplanMediaList = teachplanMediaRepository.findByCourseId(courseId);
+        // 删除TeachplanMediaPub中的数据
+        teachplanMediaPubRepository.deleteByCourseId(courseId);
+        // 将teachplanMediaList课程计划媒资信息插入到TeachplanMediaPub表
+        List<TeachplanMediaPub> teachplanMediaPubList = new ArrayList<>();
+        for (TeachplanMedia teachplanMedia : teachplanMediaList) {
+            TeachplanMediaPub teachplanMediaPub = new TeachplanMediaPub();
+            BeanUtils.copyProperties(teachplanMedia, teachplanMediaPub);
+            // 添加时间戳
+            teachplanMediaPub.setTimestamp(new Date());
+            teachplanMediaPubList.add(teachplanMediaPub);
+        }
+        teachplanMediaPubRepository.saveAll(teachplanMediaPubList);
+    }
+
 
     // 保存课程计划和媒资文件关联
     public ResponseResult savemedia(TeachplanMedia teachplanMedia) {
