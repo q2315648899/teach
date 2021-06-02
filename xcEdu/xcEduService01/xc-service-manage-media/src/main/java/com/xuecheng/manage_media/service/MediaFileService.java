@@ -32,12 +32,13 @@ public class MediaFileService {
         if (queryMediaFileRequest == null) {
             queryMediaFileRequest = new QueryMediaFileRequest();
         }
-        //查询条件匹配器
+        // 自定义条件查询
+        // 定义条件匹配器
         ExampleMatcher exampleMatcher = ExampleMatcher.matching()
                 .withMatcher("tag", ExampleMatcher.GenericPropertyMatchers.contains())//tag字段模糊匹配
                 .withMatcher("fileOriginalName",
                         ExampleMatcher.GenericPropertyMatchers.contains())//文件原始名称模糊匹配
-                .withMatcher("processStatus", ExampleMatcher.GenericPropertyMatchers.exact());//处理状态精确匹配（默认）
+                .withMatcher("processStatus", ExampleMatcher.GenericPropertyMatchers.exact());//处理状态精确匹配（默认，可不设置）
 
         //查询条件对象
         if (StringUtils.isNotEmpty(queryMediaFileRequest.getTag())) {
@@ -65,7 +66,7 @@ public class MediaFileService {
         Pageable pageable = PageRequest.of(page, size);
         // 分页查询
         Page<MediaFile> all = mediaFileRepository.findAll(example, pageable);// 实现自定义条件查询并且分页查询
-        // 总记录数
+        // 总记录数（除掉分页参数时，根据查询条件查询到的总记录数）
         long totalElements = all.getTotalElements();
         // 数据列表
         List<MediaFile> content = all.getContent();
