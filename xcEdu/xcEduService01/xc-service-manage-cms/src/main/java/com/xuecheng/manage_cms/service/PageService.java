@@ -106,7 +106,7 @@ public class PageService {
             cmsPage.setPageAliase(queryPageRequest.getPageAliase());
         }
         // 定义Example条件对象
-        Example example = Example.of(cmsPage, exampleMatcher);
+        Example<CmsPage> example = Example.of(cmsPage, exampleMatcher);
         // 分页参数
         if (page <= 0) {
             page = 1;
