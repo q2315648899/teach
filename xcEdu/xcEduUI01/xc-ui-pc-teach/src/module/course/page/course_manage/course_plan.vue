@@ -180,6 +180,8 @@
 
       },
       renderContent(h, { node, data, store }) {
+        // node是每个节点的节点信息，对应teachplanList在data（）方法中列出来的id,pname,children信息。
+        // data是每个节点所有信息，对应teachplanList在服务端数据模型对象中的所有属性
         return (
           <span style="flex: 1; display: flex; align-items: center; justify-content: space-between; font-size: 14px; padding-right: 8px;">
             <span>
