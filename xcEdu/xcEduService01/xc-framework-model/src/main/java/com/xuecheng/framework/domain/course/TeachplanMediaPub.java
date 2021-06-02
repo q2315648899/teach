@@ -14,7 +14,7 @@ import java.util.Date;
 @Data
 @ToString
 @Entity
-@Table(name="teachplan_media")
+@Table(name="teachplan_media_pub")
 @GenericGenerator(name = "jpa-assigned", strategy = "assigned")
 public class TeachplanMediaPub implements Serializable {
     private static final long serialVersionUID = -916357110051689485L;
