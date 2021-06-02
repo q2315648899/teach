@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 视频处理生产者RabbitMQ配置类
+ *
  * @author Administrator
  * @version 1.0
  * @create 2018-07-12 9:04
@@ -18,7 +20,7 @@ public class RabbitMQConfig {
 
     //视频处理路由
     @Value("${xc-service-manage-media.mq.routingkey-media-video}")
-    public  String routingkey_media_video;
+    public String routingkey_media_video;
 
     //消费者并发数量
     public static final int DEFAULT_CONCURRENT = 10;
@@ -26,6 +28,7 @@ public class RabbitMQConfig {
 
     /**
      * 交换机配置
+     *
      * @return the exchange
      */
     @Bean(EX_MEDIA_PROCESSTASK)

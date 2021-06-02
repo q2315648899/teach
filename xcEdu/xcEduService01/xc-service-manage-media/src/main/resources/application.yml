@@ -8,9 +8,9 @@ spring:
       uri:  mongodb://root:123@localhost:27017
       database: xc_media
 xc-service-manage-media:
-  upload-location: D:/teach/video/
+  upload-location: D:/teach/video/  #媒资文件上传路径
   mq:
-      routingkey-media-video: routingkey_media_video
+      routingkey-media-video: routingkey_media_video  #视频处理的路由key
 eureka:
   client:
     registerWithEureka: true #服务注册开关
