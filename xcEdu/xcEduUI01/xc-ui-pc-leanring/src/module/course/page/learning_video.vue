@@ -578,10 +578,23 @@
       this.courseId = this.$route.params.courseId
       //章节id
       this.chapter = this.$route.params.chapter
-      //取出课程Id
+      //根据课程Id查询课程信息
       systemApi.course_view(this.courseId).then((view_course)=>{
+        // console.log(view_course)
+        if(!view_course || !view_course[this.courseId]){
+          this.$message.error("获取课程信息失败，请重新进入此页面！")
+          return ;
+        }
 
-
+        let courseInfo = view_course[this.courseId]
+        console.log(courseInfo)
+        this.coursename = courseInfo.name
+        if(courseInfo.teachplan){
+          // 取出teachplan的json串，并转成对象
+          let teachplan = JSON.parse(courseInfo.teachplan);
+          // 取出课程计划
+          this.teachplanList = teachplan.children;
+        }
       })
     },
     mounted() {
