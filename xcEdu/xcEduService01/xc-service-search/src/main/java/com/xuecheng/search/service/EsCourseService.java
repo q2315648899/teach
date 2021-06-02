@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -176,5 +177,51 @@ public class EsCourseService {
         queryResult.setList(coursePubList);
         QueryResponseResult<CoursePub> queryResponseResult = new QueryResponseResult<>(CommonCode.SUCCESS, queryResult);
         return queryResponseResult;
+    }
+
+    // 使用ES的客户端向ES请求查询索引信息
+    public Map<String, CoursePub> getAll(String id) {
+        // 定义一个搜索请求对象
+        SearchRequest searchRequest = new SearchRequest(es_index);
+        // 设置类型
+        searchRequest.types(es_type);
+        // 搜索源构建对象
+        // 定义SearchSourceBuilder
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        // 设置Term Query查询
+        searchSourceBuilder.query(QueryBuilders.termQuery("id", id));// 此处是课程id，不是创建文档时文档自带的“_id”
+        // 设置过滤源字段，不用设置，取出所有字段
+        // searchSourceBuilder.featchSource()
+        searchRequest.source(searchSourceBuilder);
+
+        Map<String,CoursePub> map = new HashMap<>();
+        try {
+            SearchResponse search = client.search(searchRequest);
+            SearchHits hits = search.getHits();
+            SearchHit[] searchHits = hits.getHits();
+            for (SearchHit hit : searchHits) {
+                // 获取源文档内容
+                Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+                String courseId = (String) sourceAsMap.get("id");
+                String name = (String) sourceAsMap.get("name");
+                String grade = (String) sourceAsMap.get("grade");
+                String charge = (String) sourceAsMap.get("charge");
+                String pic = (String) sourceAsMap.get("pic");
+                String description = (String) sourceAsMap.get("description");
+                String teachplan = (String) sourceAsMap.get("teachplan");
+                CoursePub coursePub = new CoursePub();
+                coursePub.setId(courseId);
+                coursePub.setName(name);
+                coursePub.setPic(pic);
+                coursePub.setGrade(grade);
+                coursePub.setTeachplan(teachplan);
+                coursePub.setDescription(description);
+                map.put(courseId,coursePub);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return map;
     }
 }

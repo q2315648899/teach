@@ -233,9 +233,10 @@ public class TestSearch {
 
         // 搜索方式
         // 根据id查询
-        // 定义查询的id
+        // 定义查询的id(这个文档id是文档自带的“_id”，不是自己创建映射时自定义的比如“id”)
         String[] split = new String[]{"1", "2"};
         List<String> idList = Arrays.asList(split);
+        // 注意这个地方用的时termsQuery()而不是termQuery()
         searchSourceBuilder.query(QueryBuilders.termsQuery("_id", idList));
         // 设置source源字段过滤。第一个参数结果集包括哪些字段，第二个参数结果集不包括哪些字段
         searchSourceBuilder.fetchSource(new String[]{"name", "studymodel", "price", "timestamp"}, new String[]{});

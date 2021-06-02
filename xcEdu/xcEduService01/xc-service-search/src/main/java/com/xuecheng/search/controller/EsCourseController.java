@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
+import java.util.Map;
 
 /**
  * Create by wong on 2021/5/30
@@ -27,7 +27,14 @@ public class EsCourseController implements EsCourseControllerApi {
     @Override
     @GetMapping(value="/list/{page}/{size}")
     public QueryResponseResult<CoursePub> list(@PathVariable(name = "page") int page, @PathVariable(name = "size") int size,
-                                               CourseSearchParam courseSearchParam) throws IOException {
+                                               CourseSearchParam courseSearchParam){
         return esCourseService.list(page, size, courseSearchParam);
+    }
+
+    // 查询课程信息
+    @Override
+    @GetMapping("/getall/{id}")
+    public Map<String, CoursePub> getAll(@PathVariable("id") String id) {
+        return esCourseService.getAll(id);
     }
 }
