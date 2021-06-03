@@ -665,7 +665,19 @@
             // 获取该课程计划所对应的视频
             this.study(this.chapter)
           } else {
-
+            //找到该课程的二级课程计划中的第一个三级课程计划id，取出该课程计划所对应的视频
+            for (var i = 0; i < this.teachplanList.length; i++) {
+              let firstTeachplan = this.teachplanList[i];
+              if (firstTeachplan.children && firstTeachplan.children.length > 0) {
+                // 取出二级课程计划下的第一个三级课程计划
+                let secondTeachplan = firstTeachplan.children[0];
+                // 课程计划的id
+                let teachplanId = secondTeachplan.id;
+                // 获取该课程计划所对应的视频
+                this.study(teachplanId)
+                return ;
+              }
+            }
           }
         }
       })
