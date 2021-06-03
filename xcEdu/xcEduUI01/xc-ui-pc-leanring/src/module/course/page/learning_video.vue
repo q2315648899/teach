@@ -7,7 +7,7 @@
         <div class="course-cont-top-video" style="position: relative;">
           <div class="video-box">
             <div class="top text-center">
-             {{coursename}}
+              {{coursename}}
             </div>
             <div class="video text-center" style="padding-right: 55px;">
               <div class="video-mine">
@@ -39,70 +39,85 @@
                   <div class="my-note">
                     <div class="textarea-box">
                       <textarea name="my-note" id=""></textarea>
-                      <div class="info"><span class="time"><i class="i-play"></i>23`22` </span><span class="not-but">提交</span></div>
+                      <div class="info"><span class="time"><i class="i-play"></i>23`22` </span><span
+                        class="not-but">提交</span></div>
                     </div>
                     <ul class="my-item-box">
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                     </ul>
@@ -111,66 +126,80 @@
                   <div class="sel-note">
                     <ul class="my-item-box">
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="time"><i class="i-play"></i>23`22` </span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                     </ul>
@@ -187,11 +216,13 @@
                     <div class="textarea-box">
                       <input type="text" class="ask-title" value="" placeholder="请输入问题标题">
                       <textarea name="my-note" id="" placeholder="请输入问题描述"></textarea>
-                      <div class="info"><span class="pic" onclick="screenshot()">截图 </span><span class="not-but">保存</span></div>
+                      <div class="info"><span class="pic" onclick="screenshot()">截图 </span><span
+                        class="not-but">保存</span></div>
                     </div>
                     <ul class="my-item-box">
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -201,7 +232,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -211,7 +243,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -221,7 +254,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -231,7 +265,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -241,7 +276,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -251,12 +287,14 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
                         </div>
                         <div class="operation"><span>2017-2-29</span>
-                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i class="i-laud"></i>赞</span></div>
+                          <div class="oper-box"><span><i class="i-edt"></i>编辑</span><span><i class="i-del"></i>删除</span><span><i
+                            class="i-laud"></i>赞</span></div>
                         </div>
                       </li>
                     </ul>
@@ -265,7 +303,8 @@
                   <div class="sel-note">
                     <ul class="my-item-box">
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -275,7 +314,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -285,7 +325,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -295,7 +336,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -305,7 +347,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -315,7 +358,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -325,7 +369,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -335,7 +380,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -345,7 +391,8 @@
                         </div>
                       </li>
                       <li>
-                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span class="name">王老师</span><span class="our-answer">我来回答</span></div>
+                        <div><span><img src="/static/images/asset-vid.png" alt=""></span><span
+                          class="name">王老师</span><span class="our-answer">我来回答</span></div>
                         <div class="tit">这个是我想问的问题</div>
                         <div class="cont">
                           课程内容 消息回复接口（图文,语音消息的自动回复） 素材管理接口（图片上传） 自定义菜单接口（菜单的创建，查询，删除）
@@ -367,12 +414,13 @@
                   <div class="my-note">
                     <div class="evaluate">
                       <div class="eva-top">
-                        <div class="tit">课程评分 </div>
+                        <div class="tit">课程评分</div>
                         <div class="star">
                           <div class="score"><i>5</i></div>
-                        </div><span class="star-score"> <i>5</i> 分</span></div>
+                        </div>
+                        <span class="star-score"> <i>5</i> 分</span></div>
                       <div class="eva-cont">
-                        <div class="tit">学员评语 </div>
+                        <div class="tit">学员评语</div>
                         <div class="text-box">
                           <textarea class="form-control" rows="5" placeholder="扯淡、吐槽、表扬、鼓励......想说啥说啥！"></textarea>
                           <div class="text-right"><span>发表评论</span></div>
@@ -502,19 +550,22 @@
             <div class="navCont">
               <div class="course-weeklist">
                 <div class="nav nav-stacked" v-for="(teachplan_first, index) in teachplanList">
-                  <div class="tit nav-justified text-center"><i class="pull-left glyphicon glyphicon-th-list"></i>{{teachplan_first.pname}}<i class="pull-right"></i></div>
-                  <li   v-if="teachplan_first.children!=null" v-for="(teachplan_second, index) in teachplan_first.children"><i class="glyphicon glyphicon-check"></i>
+                  <div class="tit nav-justified text-center"><i class="pull-left glyphicon glyphicon-th-list"></i>{{teachplan_first.pname}}<i
+                    class="pull-right"></i></div>
+                  <li v-if="teachplan_first.children!=null"
+                      v-for="(teachplan_second, index) in teachplan_first.children"><i
+                    class="glyphicon glyphicon-check"></i>
                     <a :href="url" @click="study(teachplan_second.id)">
                       {{teachplan_second.pname}}
                     </a>
                   </li>
 
-                 <!-- <div class="tit nav-justified text-center"><i class="pull-left glyphicon glyphicon-th-list"></i>第一章<i class="pull-right"></i></div>
-                  <li  ><i class="glyphicon glyphicon-check"></i>
-                    <a :href="url" >
-                      第一节
-                    </a>
-                  </li>-->
+                  <!-- <div class="tit nav-justified text-center"><i class="pull-left glyphicon glyphicon-th-list"></i>第一章<i class="pull-right"></i></div>
+                   <li  ><i class="glyphicon glyphicon-check"></i>
+                     <a :href="url" >
+                       第一节
+                     </a>
+                   </li>-->
                   <!--<li><i class="glyphicon glyphicon-unchecked"></i>为什么分为A、B、C部分</li>-->
                 </div>
 
@@ -540,12 +591,12 @@
     components: {},
     data() {
       return {
-        url:'',//当前url
-        courseId:'',//课程id
-        chapter:'',//章节Id
-        coursename:'课程名称',//课程名称
-        coursepic:'',//课程图片
-        teachplanList:[],//课程计划
+        url: '',//当前url
+        courseId: '',//课程id
+        chapter: '',//章节Id
+        coursename: '课程名称',//课程名称
+        coursepic: '',//课程图片
+        teachplanList: [],//课程计划
         playerOptions: {//播放参数
           autoplay: false,
           controls: true,
@@ -559,52 +610,74 @@
     },
 
     methods: {
-      playvideo(video_src){
+      playvideo(video_src) {
         console.log(video_src)
         this.playerOptions.sources[0].src = video_src
         this.playerOptions.autoplay = true
       },
 
-      //开始学习
-      study(chapter){
-
+      //开始学习，获取课程计划所对应的视频地址
+      study(chapter) {
+        // get_media方法
+        // 获取播放地址
+        courseApi.get_media(this.courseId, chapter).then((res) => {
+          if (res.success) {
+            // 获取视频播放地址
+            let fileUrl = res.fileUrl;// 相对路径
+            let videoUrl = sysConfig.videoUrl + fileUrl;// 视频完整的播放路径
+            //播放视频
+            this.playvideo(videoUrl)
+          } else if (res.message) {
+            this.$message.error(res.message)
+          } else {
+            this.$message.error("播放视频失败，请刷新页面重试")
+          }
+        }).catch(res => {
+          this.$message.error("播放视频失败，请刷新页面重试")
+        });
       }
-
     },
-    created(){
-        //当前请求的url
+    created() {
+      //当前请求的url
       this.url = window.location
       //课程id
       this.courseId = this.$route.params.courseId
       //章节id
       this.chapter = this.$route.params.chapter
       //根据课程Id查询课程信息
-      systemApi.course_view(this.courseId).then((view_course)=>{
+      systemApi.course_view(this.courseId).then((view_course) => {
         // console.log(view_course)
-        if(!view_course || !view_course[this.courseId]){
+        if (!view_course || !view_course[this.courseId]) {
           this.$message.error("获取课程信息失败，请重新进入此页面！")
-          return ;
+          return;
         }
 
         let courseInfo = view_course[this.courseId]
         console.log(courseInfo)
         this.coursename = courseInfo.name
-        if(courseInfo.teachplan){
+        if (courseInfo.teachplan) {
           // 取出teachplan的json串，并转成对象
           let teachplan = JSON.parse(courseInfo.teachplan);
           // 取出课程计划
           this.teachplanList = teachplan.children;
+          // 如果课程计划id不等于0，直接播放该课程计划的视频
+          if (this.chapter != '0') {
+            // 获取该课程计划所对应的视频
+            this.study(this.chapter)
+          } else {
+
+          }
         }
       })
     },
     mounted() {
 
       //播放测试
-      this.playvideo("http://video.xuecheng.com/video/hls/lucene.m3u8")
+      // this.playvideo("http://video.xuecheng.com/video/hls/lucene.m3u8")
 //      this.playvideo("http://video.xuecheng.com/video/5/3/53ac4cca3ddf386c21f4f1cbb4dc9876/hls/53ac4cca3ddf386c21f4f1cbb4dc9876.m3u8")
 
-      $(function() {
-        $('.active-box span').click(function() {
+      $(function () {
+        $('.active-box span').click(function () {
           $(this).css({
             'color': '#00a4ff'
           })
@@ -614,7 +687,7 @@
             $(this).find('.i-coll').css('background-position', '1px -75px')
           }
         })
-        $('.learing-box .item-list').mouseover(function(e) {
+        $('.learing-box .item-list').mouseover(function (e) {
           $(this).css({
             'height': '140px'
           }).addClass('hov').siblings().css({
@@ -622,7 +695,7 @@
           })
           $(this).siblings().removeClass('hov')
         })
-        $('.learing-box .item-box').mouseout(function() {
+        $('.learing-box .item-box').mouseout(function () {
           $(this).find('.item-list:first').css({
             'height': '140px'
           }).addClass('hov')
@@ -633,8 +706,8 @@
       })
 
 
-      $(function() {
-        $('.learing-box .item-list').mouseover(function(e) {
+      $(function () {
+        $('.learing-box .item-list').mouseover(function (e) {
           $(this).css({
             'height': '140px'
           }).addClass('hov').siblings().css({
@@ -642,7 +715,7 @@
           })
           $(this).siblings().removeClass('hov')
         })
-        $('.learing-box .item-box').mouseout(function() {
+        $('.learing-box .item-box').mouseout(function () {
           $(this).find('.item-list:first').css({
             'height': '140px'
           }).addClass('hov')
@@ -652,9 +725,9 @@
         })
       })
 
-      $(function() {
+      $(function () {
         //代码点击显示
-        $(".item .item-left").click(function() {
+        $(".item .item-left").click(function () {
           var pre = $(this).parent();
           if (!pre.find('pre').hasClass('code-pop')) {
             pre.find('pre').addClass('code-pop');
@@ -665,11 +738,11 @@
           }
         });
         //代码切换
-        $('.content-title p a').click(function() {
+        $('.content-title p a').click(function () {
           $(this).addClass('all').siblings().removeClass('all');
         })
 
-        $('.learing-box .item-list').mouseover(function(e) {
+        $('.learing-box .item-list').mouseover(function (e) {
           $(this).css({
             'height': '140px'
           }).addClass('hov').siblings().css({
@@ -677,7 +750,7 @@
           })
           $(this).siblings().removeClass('hov')
         })
-        $('.learing-box .item-box').mouseout(function() {
+        $('.learing-box .item-box').mouseout(function () {
           $(this).find('.item-list:first').css({
             'height': '140px'
           }).addClass('hov')
@@ -688,15 +761,15 @@
       })
 
 
-      $(function() {
+      $(function () {
         //评分
-        $('.star .score').map(function(n, i) {
+        $('.star .score').map(function (n, i) {
           var x = Number($(this).find('i').text());
           var w = 109 * (1 - x / 5);
           $(this).css('width', w + 'px');
         })
         //评论打分
-        $('.evaluate .star').mousemove(function(e) {
+        $('.evaluate .star').mousemove(function (e) {
           var startX = $(this).offset().left;
           var movX = e.clientX - startX + 0.5;
           var w = 145 * (1 - movX / 145);
@@ -704,17 +777,16 @@
           $('.star-score i').text((movX / 145 * 5).toFixed(1))
         })
         //星级评分
-        $('.grade').map(function(n, i) {
+        $('.grade').map(function (n, i) {
           var pret = $(this).find('.percent-num i').text();
           var wt = $(this).find('.grade-percent').width();
           $(this).find('.grade-percent span').css('width', wt * pret / 100);
         })
 
 
-
       })
 
-      $(function() {
+      $(function () {
         var vidHit = $('html').height() - 0;
         var vidCenHit = (vidHit - $('.video-play').height()) / 2;
         var vdwt = $('.video').width();
@@ -726,13 +798,14 @@
 
         $('.note-cont').css('height', vidHit - $('.note-box .note').height() - 65);
 
-        $(window).resize(function() {
+        $(window).resize(function () {
           $('.course-cont-top-video,.video').css('height', vidHit);
           $('.video').css('height', vidHit - 50);
 //      $('#video-player').height(vidHit - 70);
           $('.nodte-cont').css('height', vidHit - $('.note-box .note').height() - 65);
         });
         $(window).resize();
+
         //还原初始状态-控制器
         function setStart(obj) {
           if (obj === 'ck') { //左导航
@@ -792,6 +865,7 @@
             }, 500);
           }
         }
+
         //
         function setnav() {
           if ($('.course-nav .nav').hasClass('nv')) {
@@ -807,6 +881,7 @@
             }, 500);
           }
         }
+
         //
         function setak() {
           if ($('.course-nav .lab-ask').hasClass('ak')) {
@@ -822,6 +897,7 @@
             }, 500);
           }
         }
+
         // 讲义
         function setcm() {
           if ($('.course-nav .lab-com').hasClass('cm')) {
@@ -837,8 +913,9 @@
             }, 500);
           }
         }
+
         //
-        $('.note-box .problem').click(function() {
+        $('.note-box .problem').click(function () {
           alert('wenda')
           if (!$(this).hasClass('ck')) {
             $(this).addClass('ck');
@@ -852,7 +929,7 @@
         });
         //
         var reht = $(".video-box .resou-box").height();
-        $(".video-box .pull-right").click(function() {
+        $(".video-box .pull-right").click(function () {
           if (!$(this).hasClass('ck')) {
             $(this).addClass('ck');
             $(".video-box .resources").animate({
@@ -866,7 +943,7 @@
           }
         })
         //笔记切换
-        $('.note-box .note-lab span, .ask-box .note-lab span').click(function() {
+        $('.note-box .note-lab span, .ask-box .note-lab span').click(function () {
           $(this).addClass('active').siblings().removeClass('active')
           if ($(this).index() == 1) {
             $('.note-item-cont').animate({
@@ -882,7 +959,7 @@
         var myNtHt = $('.my-note .textarea-box').height();
         $('.my-note .my-item-box').css('height', $('.note-box').height() - myNtHt - 160 + "px");
         $('.sel-note .my-item-box').css('height', $('.note-box').height() - 160 + "px");
-        $('.course-nav .lab-note').click(function() {
+        $('.course-nav .lab-note').click(function () {
           window.location = '#'
           setStart('nt');
           if (!$(this).hasClass('nt')) {
@@ -910,7 +987,7 @@
           }
         })
         //目录
-        $('.course-nav .nav').click(function() {
+        $('.course-nav .nav').click(function () {
           window.location = '#'
           setStart('nv');
           if (!$(this).hasClass('nv')) {
@@ -938,7 +1015,7 @@
           }
         })
         // 问答
-        $('.course-nav .lab-ask').click(function() {
+        $('.course-nav .lab-ask').click(function () {
           window.location = '#'
           setStart('ak');
           if (!$(this).hasClass('ak')) {
@@ -966,7 +1043,7 @@
           }
         })
         // 评论
-        $('.course-nav .lab-com').click(function() {
+        $('.course-nav .lab-com').click(function () {
           window.location = '#'
           setStart('cm');
           if (!$(this).hasClass('cm')) {
@@ -1020,18 +1097,22 @@
     width: 500px;
     margin: 20px auto;
   }
-  .video-js{
-    position:inherit;
+
+  .video-js {
+    position: inherit;
   }
-  .learing-course{
+
+  .learing-course {
     background: #000;
   }
+
   .nav > li > a {
     position: relative;
     display: unset;
     padding: 10px 15px;
-/*    color: #ebeef5;*/
+    /*    color: #ebeef5;*/
   }
-/*  .nav > li > a:hover { background-color:#00a4ff; }*/
+
+  /*  .nav > li > a:hover { background-color:#00a4ff; }*/
 
 </style>
