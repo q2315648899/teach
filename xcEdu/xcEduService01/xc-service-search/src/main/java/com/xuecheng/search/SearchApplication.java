@@ -3,12 +3,14 @@ package com.xuecheng.search;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @author Administrator
  * @version 1.0
  **/
+@EnableDiscoveryClient//一个EurekaClient从EurekaServer发现服务，表示它是一个Eureka的客户端
 @SpringBootApplication
 @EntityScan("com.xuecheng.framework.domain.search")//扫描实体类
 @ComponentScan(basePackages={"com.xuecheng.api"})//扫描接口
