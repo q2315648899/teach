@@ -1,17 +1,20 @@
-package com.xuecheng.auth;
+package com.xuecheng.auth.service;
 
+import com.alibaba.fastjson.JSON;
 import com.xuecheng.framework.client.XcServiceList;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import com.xuecheng.framework.domain.ucenter.ext.AuthToken;
+import com.xuecheng.framework.domain.ucenter.response.AuthCode;
+import com.xuecheng.framework.exception.ExceptionCast;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Base64Utils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -21,13 +24,16 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
- * Create by wong on 2021/6/4
+ * Create by wong on 2021/6/5
  */
-@SpringBootTest
-@RunWith(SpringRunner.class)
-public class TestClient {
+@Service
+public class AuthService {
+
+    @Value("${auth.tokenValiditySeconds}")
+    int tokenValiditySeconds;
 
     @Autowired
     LoadBalancerClient loadBalancerClient;
@@ -35,12 +41,28 @@ public class TestClient {
     @Autowired
     RestTemplate restTemplate;
 
-    /**
-     * 密码模式申请jwt令牌
-     * 远程请求spring security获取令牌
-     */
-    @Test
-    public void testClient() {
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
+    // 用户认证申请令牌
+    public AuthToken login(String username, String password, String clientId, String clientSecret) {
+        // 密码模式远程请求spring security获取JWT令牌
+        AuthToken authToken = applyToken(username, password, clientId, clientSecret);
+        if (authToken == null) {
+            ExceptionCast.cast(AuthCode.AUTH_LOGIN_APPLYTOKEN_FAIL);
+        }
+        //将token令牌存储到redis
+        String access_token = authToken.getAccess_token();
+        String content = JSON.toJSONString(authToken);
+        boolean saveTokenResult = saveToken(access_token, content, tokenValiditySeconds);
+        if (!saveTokenResult) {
+            ExceptionCast.cast(AuthCode.AUTH_LOGIN_TOKEN_SAVEFAIL);
+        }
+        return authToken;
+    }
+
+    // 密码模式远程请求spring security获取JWT令牌
+    private AuthToken applyToken(String username, String password, String clientId, String clientSecret) {
         // 采用客户端负载均衡，从eureka获取认证服务的ip 和端口（因为spring security在认证服务中）
         // 从eureka中获取认证服务的一个实例的地址
         ServiceInstance serviceInstance = loadBalancerClient.choose(XcServiceList.XC_SERVICE_UCENTER_AUTH);
@@ -52,13 +74,13 @@ public class TestClient {
         //1、header信息，包括了http basic认证信息
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
         // 返回的httpbasic自带"Basic WGNXZWJBcHA6WGNXZWJBcHA="前缀
-        String httpbasic = getHttpBasic("XcWebApp", "XcWebApp");
+        String httpbasic = getHttpBasic(clientId, clientSecret);
         headers.add("Authorization", httpbasic);//"Basic WGNXZWJBcHA6WGNXZWJBcHA="
         //2、包括：grant_type、username、passowrd
         MultiValueMap<String, String> body = new LinkedMultiValueMap<String, String>();
         body.add("grant_type", "password");
-        body.add("username", "itcast");
-        body.add("password", "123");
+        body.add("username", username);
+        body.add("password", password);
 
         //exchange(String url, HttpMethod method, @Nullable HttpEntity<?> requestEntity, Class<T> responseType, Object... uriVariables)
         /**
@@ -85,7 +107,18 @@ public class TestClient {
         ResponseEntity<Map> exchange = restTemplate.exchange(authUrl, HttpMethod.POST, httpEntity, Map.class);
 
         Map bodyMap = exchange.getBody();
-        System.out.println(bodyMap);
+        if (bodyMap == null ||
+                bodyMap.get("access_token") == null ||
+                bodyMap.get("refresh_token") == null ||
+                bodyMap.get("jti") == null) {//jti是jwt令牌的唯一标识作为用户身份令牌
+            ExceptionCast.cast(AuthCode.AUTH_LOGIN_APPLYTOKEN_FAIL);
+        }
+
+        AuthToken authToken = new AuthToken();
+        authToken.setAccess_token((String) bodyMap.get("jti"));////设置身份令牌
+        authToken.setRefresh_token((String) bodyMap.get("refresh_token"));////设置刷新令牌
+        authToken.setJwt_token((String) bodyMap.get("access_token"));////设置JWT令牌
+        return authToken;
     }
 
     /**
@@ -102,4 +135,23 @@ public class TestClient {
         byte[] encode = Base64Utils.encode(string.getBytes());
         return "Basic " + new String(encode);
     }
+
+    /**
+     * 保存令牌信息到redis数据库
+     *
+     * @param access_token 用户身份令牌标识作为key
+     * @param content      令牌全部内容，就是AuthToken对象的内容
+     * @param ttl          有效时间
+     * @return
+     */
+    private boolean saveToken(String access_token, String content, long ttl) {
+        //令牌名称
+        String name = "user_token:" + access_token;
+        //保存到令牌到redis
+        stringRedisTemplate.boundValueOps(name).set(content, ttl, TimeUnit.SECONDS);
+        //获取过期时间
+        Long expire = stringRedisTemplate.getExpire(name);
+        return expire > 0;
+    }
+
 }
