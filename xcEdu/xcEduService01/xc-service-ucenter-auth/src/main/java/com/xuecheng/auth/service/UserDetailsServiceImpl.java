@@ -34,9 +34,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         //没有认证统一采用httpbasic认证，httpbasic中存储了client_id和client_secret，开始认证client_id和client_secret
         if (authentication == null) {
+            // 从数据库表oauth_client_details中，通过client_id查询客户端详情信息
             ClientDetails clientDetails = clientDetailsService.loadClientByClientId(username);
             if (clientDetails != null) {
-                //密码
+                // 得到客户端密码（数据库中是BCryptPasswordEncoder加密后的）
                 String clientSecret = clientDetails.getClientSecret();
                 return new User(username, clientSecret, AuthorityUtils.commaSeparatedStringToAuthorityList(""));
             }
