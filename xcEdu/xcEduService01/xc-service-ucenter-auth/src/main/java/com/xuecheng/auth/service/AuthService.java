@@ -159,12 +159,27 @@ public class AuthService {
      */
     private boolean saveToken(String access_token, String content, long ttl) {
         //令牌名称
-        String name = "user_token:" + access_token;
+        String key = "user_token:" + access_token;
         //保存到令牌到redis
-        stringRedisTemplate.boundValueOps(name).set(content, ttl, TimeUnit.SECONDS);
+        stringRedisTemplate.boundValueOps(key).set(content, ttl, TimeUnit.SECONDS);
         //获取过期时间
-        Long expire = stringRedisTemplate.getExpire(name);
+        Long expire = stringRedisTemplate.getExpire(key, TimeUnit.SECONDS);
         return expire > 0;
     }
 
+    // 拿身份令牌从redis中查询jwt令牌
+    public AuthToken getUserToken(String access_token) {
+        String key = "user_token:" + access_token;
+        // 从redis中取得令牌信息
+        String userTokenString = stringRedisTemplate.opsForValue().get(key);
+        AuthToken authToken = null;
+        try {
+            // 转成对象
+            authToken = JSON.parseObject(userTokenString, AuthToken.class);
+            return authToken;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
