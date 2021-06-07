@@ -162,7 +162,7 @@ public class AuthService {
         String key = "user_token:" + access_token;
         //保存到令牌到redis
         stringRedisTemplate.boundValueOps(key).set(content, ttl, TimeUnit.SECONDS);
-        //获取过期时间
+        //获取过期时间，判断是否保存成功
         Long expire = stringRedisTemplate.getExpire(key, TimeUnit.SECONDS);
         return expire > 0;
     }
@@ -182,4 +182,12 @@ public class AuthService {
         }
         return null;
     }
+
+    // 从redis中删除jwt令牌
+    public boolean delToken(String access_token) {
+        String key = "user_token:" + access_token;
+        stringRedisTemplate.delete(key);
+        return true;
+    }
+
 }

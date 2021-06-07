@@ -63,7 +63,7 @@ public class AuthController implements AuthControllerApi {
         // 访问token
         String access_token = authToken.getAccess_token();
         // 将访问令牌存储到cookie
-        saveCookie(access_token);
+        this.saveCookie(access_token);
         return new LoginResult(CommonCode.SUCCESS, access_token);
 
     }
@@ -77,10 +77,23 @@ public class AuthController implements AuthControllerApi {
         CookieUtil.addCookie(response, cookieDomain, "/", "uid", token, cookieMaxAge, false);
     }
 
+    // 从cookie删除令牌token
+    private void clearCookie(String token) {
+        HttpServletResponse response = ((ServletRequestAttributes)
+                RequestContextHolder.getRequestAttributes()).getResponse();
+        CookieUtil.addCookie(response, cookieDomain, "/", "uid", token, 0, false);
+    }
+
     @Override
     @PostMapping("/userlogout")
     public ResponseResult logout() {
-        return null;
+        // 取出cookie中的身份令牌
+        String access_token = getTokenFormCookie();
+        // 删除redis中的令牌token
+        boolean result = authService.delToken(access_token);
+        // 删除cookie中的令牌token
+        this.clearCookie(access_token);
+        return new ResponseResult(CommonCode.SUCCESS);
     }
 
     @Override
