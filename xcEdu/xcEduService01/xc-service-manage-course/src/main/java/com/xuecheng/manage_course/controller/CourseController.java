@@ -11,6 +11,7 @@ import com.xuecheng.framework.model.response.QueryResponseResult;
 import com.xuecheng.framework.model.response.ResponseResult;
 import com.xuecheng.manage_course.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -24,6 +25,8 @@ public class CourseController implements CourseControllerApi {
     CourseService courseService;
 
     // 课程计划查询
+    // 当用户拥有course_teachplan_list权限时方可访问此方法
+    @PreAuthorize("hasAuthority('course_teachplan_list')")
     @Override
     @GetMapping("/teachplan/list/{courseId}")
     public TeachplanNode findTeachplanListById(@PathVariable("courseId") String courseId) {
@@ -31,6 +34,8 @@ public class CourseController implements CourseControllerApi {
     }
 
     // 添加课程计划
+    // 当用户拥有course_teachplan_add权限时方可访问此方法
+    @PreAuthorize("hasAuthority('course_teachplan_add')")
     @Override
     @PostMapping("/teachplan/add")
     public ResponseResult AddTeachplan(@RequestBody Teachplan teachplan) {
@@ -87,6 +92,8 @@ public class CourseController implements CourseControllerApi {
     }
 
     // 查询课程图片
+    // 当用户拥有course_find_pic权限时方可访问此方法
+    @PreAuthorize("hasAuthority('course_find_pic')")
     @Override
     @GetMapping("/coursepic/list/{courseId}")
     public CoursePic findCoursePic(@PathVariable("courseId") String courseId) {

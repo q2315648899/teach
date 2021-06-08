@@ -69,8 +69,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<XcMenu> permissions = userext.getPermissions();
         List<String> user_permission = new ArrayList<>();
         permissions.forEach(item -> user_permission.add(item.getCode()));
-//        user_permission.add("course_get_baseinfo");
-//        user_permission.add("course_find_pic");
+        // 使用静态权限表示用户拥有的权限
+        user_permission.add("course_get_baseinfo");// 查询课程信息
+        user_permission.add("course_find_pic");// 图片查询
         String user_permission_string = StringUtils.join(user_permission.toArray(), ",");
         UserJwt userDetails = new UserJwt(username,
                 password,

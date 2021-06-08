@@ -26,7 +26,7 @@ import java.security.KeyPair;
 
 
 @Configuration
-@EnableAuthorizationServer
+@EnableAuthorizationServer// 标识这是一个认证服务
 class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     private DataSource dataSource;

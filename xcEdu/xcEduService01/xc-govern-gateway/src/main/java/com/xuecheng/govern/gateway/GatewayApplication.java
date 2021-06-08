@@ -10,7 +10,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
  * @create 2018-07-17 12:03
  **/
 @SpringBootApplication
-@EnableZuulProxy//此工程是一个zuul网关
+@EnableZuulProxy//标识此工程是一个zuul网关
 public class GatewayApplication {
 
     public static void main(String[] args) {

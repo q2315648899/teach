@@ -89,6 +89,6 @@ public class LoginFilter extends ZuulFilter {
         //设置状态码
         requestContext.setResponseStatusCode(200);
         HttpServletResponse response = requestContext.getResponse();
-        response.setContentType("application/json;charset=utf‐8");
+        response.setContentType("application/json;charset=utf-8");
     }
 }
