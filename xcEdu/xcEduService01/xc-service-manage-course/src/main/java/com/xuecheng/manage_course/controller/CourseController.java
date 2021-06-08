@@ -43,6 +43,8 @@ public class CourseController implements CourseControllerApi {
     }
 
     // 查询我的课程列表
+    // 当用户拥有course_find_list权限时方可访问此方法
+    @PreAuthorize("hasAuthority('course_find_list')")
     @Override
     @GetMapping("/coursebase/list/{page}/{size}")
     public QueryResponseResult findCourseList(@PathVariable("page") int page, @PathVariable("size") int size, CourseListRequest courseListRequest) {

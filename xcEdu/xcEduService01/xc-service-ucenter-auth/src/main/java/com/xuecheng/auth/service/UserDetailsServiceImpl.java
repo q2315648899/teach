@@ -56,7 +56,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //        XcUserExt userext = new XcUserExt();
 //        userext.setUsername("itcast");
 //        userext.setPassword(new BCryptPasswordEncoder().encode("123"));
-        userext.setPermissions(new ArrayList<XcMenu>());// 权限暂时使用静态的
+//        userext.setPermissions(new ArrayList<XcMenu>());// 权限暂时使用静态的
         if (userext == null) {
             return null;
         }
@@ -67,11 +67,14 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //用户权限，这里暂时使用静态数据，最终会从数据库读取
         //从数据库获取权限
         List<XcMenu> permissions = userext.getPermissions();
+        if (permissions == null) {
+            permissions = new ArrayList<>();
+        }
         List<String> user_permission = new ArrayList<>();
         permissions.forEach(item -> user_permission.add(item.getCode()));
         // 使用静态权限表示用户拥有的权限
-        user_permission.add("course_get_baseinfo");// 查询课程信息
-        user_permission.add("course_find_pic");// 图片查询
+//        user_permission.add("course_get_baseinfo");// 查询课程信息
+//        user_permission.add("course_find_pic");// 图片查询
         String user_permission_string = StringUtils.join(user_permission.toArray(), ",");
         UserJwt userDetails = new UserJwt(username,
                 password,
