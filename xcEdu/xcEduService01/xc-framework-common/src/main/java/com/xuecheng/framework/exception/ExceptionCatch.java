@@ -36,7 +36,7 @@ public class ExceptionCatch {
         return responseResult;
     }
 
-    // 捕获 Exception异常(不可预知，不可预知异常通常是由于系统出现bug、或一些不要抗拒的错误（比如网络中断、服务器宕机等）)
+    // 捕获 Exception异常(不可预知，不可预知异常通常是由于系统出现bug、或一些不可抗拒的错误（比如网络中断、服务器宕机等）)
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public ResponseResult Exception(Exception e) {
@@ -44,7 +44,7 @@ public class ExceptionCatch {
         LOGGER.error("catch exception : {}\r\nexception: ", e.getMessage(), e);
         if(EXCEPTIONS == null)
             EXCEPTIONS = builder.build();// EXCPRIONS构建成功
-        // 从EXCEPTIONS中找异常类型所对应的错误代码，如果找到了将错误代码响应给用户，如果找不到给用户相应9999异常
+        // 从EXCEPTIONS中找异常类型所对应的错误代码，如果找到了将错误代码响应给用户，如果找不到给用户响应99999异常
         final ResultCode resultCode = EXCEPTIONS.get(e.getClass());
         final ResponseResult responseResult;
         if (resultCode != null) {
