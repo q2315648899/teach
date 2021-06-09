@@ -156,10 +156,12 @@ public class CourseService {
     }
 
     // 查询我的课程列表
-    public QueryResponseResult findCourseList(int page, int size, CourseListRequest courseListRequest) {
+    public QueryResponseResult findCourseList(String companyId, int page, int size, CourseListRequest courseListRequest) {
         if (courseListRequest == null) {
             courseListRequest = new CourseListRequest();
         }
+        //将教育机构id传入查询参数中
+        courseListRequest.setCompanyId(companyId);
         // 分页参数
         if (page <= 0) {
             page = 1;

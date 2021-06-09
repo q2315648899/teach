@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * 网关过滤器
+ *
  * Create by wong on 2021/6/8
  */
 @Component

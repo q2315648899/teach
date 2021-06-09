@@ -48,7 +48,10 @@ public class CourseController implements CourseControllerApi {
     @Override
     @GetMapping("/coursebase/list/{page}/{size}")
     public QueryResponseResult findCourseList(@PathVariable("page") int page, @PathVariable("size") int size, CourseListRequest courseListRequest) {
-        return courseService.findCourseList(page, size, courseListRequest);
+        //先使用静态数据测试
+        String companyId = "1";
+
+        return courseService.findCourseList("", page, size, courseListRequest);
     }
 
     // 新增课程
@@ -136,7 +139,6 @@ public class CourseController implements CourseControllerApi {
     public ResponseResult savemedia(@RequestBody TeachplanMedia teachplanMedia) {
         return courseService.savemedia(teachplanMedia);
     }
-
 
 
 }
