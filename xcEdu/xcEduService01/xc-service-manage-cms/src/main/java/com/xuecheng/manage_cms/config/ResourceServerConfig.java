@@ -1,4 +1,4 @@
-package com.xuecheng.manage_course.config;
+package com.xuecheng.manage_cms.config;
 
 /**
  * Create by wong on 2021/6/4
@@ -70,7 +70,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 //请求均放行（"/**"）。
                 .antMatchers("/v2/api-docs", "/swagger-resources/configuration/ui",
                         "/swagger-resources", "/swagger-resources/configuration/security",
-                        "/swagger-ui.html", "/webjars/**", "/course/coursepic/list/**", "/course/courseview/**").permitAll()
+                        "/swagger-ui.html", "/webjars/**", "/course/coursepic/list/*").permitAll()
                 .anyRequest().authenticated();
     }
 }

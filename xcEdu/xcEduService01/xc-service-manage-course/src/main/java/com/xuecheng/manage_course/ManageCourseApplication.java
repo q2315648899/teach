@@ -1,5 +1,6 @@
 package com.xuecheng.manage_course;
 
+import com.xuecheng.framework.interceptor.FeignClientInterceptor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -19,9 +20,9 @@ import org.springframework.web.client.RestTemplate;
 @EnableDiscoveryClient//一个EurekaClient从EurekaServer发现服务，表示它是一个Eureka的客户端
 @SpringBootApplication
 @EntityScan("com.xuecheng.framework.domain.course")//扫描实体类
-@ComponentScan(basePackages={"com.xuecheng.api"})//扫描接口
-@ComponentScan(basePackages={"com.xuecheng.manage_course"})
-@ComponentScan(basePackages={"com.xuecheng.framework"})//扫描common下的所有类
+@ComponentScan(basePackages = {"com.xuecheng.api"})//扫描接口
+@ComponentScan(basePackages = {"com.xuecheng.manage_course"})
+@ComponentScan(basePackages = {"com.xuecheng.framework"})//扫描common下的所有类
 public class ManageCourseApplication {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(ManageCourseApplication.class, args);
@@ -33,4 +34,9 @@ public class ManageCourseApplication {
         return new RestTemplate(new OkHttp3ClientHttpRequestFactory());
     }
 
+    // Feign远程服务调用的拦截器
+    @Bean
+    public FeignClientInterceptor feignClientInterceptor() {
+        return new FeignClientInterceptor();
+    }
 }
