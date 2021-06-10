@@ -26,7 +26,7 @@ public class ChooseCourseTask {
     @Autowired
     TaskService taskService;
 
-    // 添加选课信息定时任务
+    // 添加选课信息的定时任务
     @Scheduled(cron = "0/3 * * * * *")
     public void sendChoosecourseTask() {
         //取出当前时间1分钟之前的时间
@@ -34,7 +34,14 @@ public class ChooseCourseTask {
         calendar.setTime(new Date());
         calendar.add(GregorianCalendar.MINUTE, -1);
         Date time = calendar.getTime();
-        List<XcTask> taskList = taskService.findTaskList(time, 100);
+        List<XcTask> xcTaskList = taskService.findTaskList(time, 100);
+        System.out.println(xcTaskList);
+        // 调用service发布消息,将添加选课的任务发送给mq
+        for (XcTask xcTask : xcTaskList) {
+            String exchange = xcTask.getMqExchange();// 要发送的交换机
+            String routingKey = xcTask.getMqRoutingkey();// 发送消息要带的routingKey
+            taskService.publish(xcTask, exchange, routingKey);
+        }
     }
 
 

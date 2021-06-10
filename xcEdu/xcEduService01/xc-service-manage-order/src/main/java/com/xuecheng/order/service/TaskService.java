@@ -8,9 +8,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Create by wong on 2021/6/10
@@ -31,4 +33,24 @@ public class TaskService {
         return xcTasks.getContent();
     }
 
+    /**
+     * 发布消息
+     *
+     * @param xcTask     任务对象
+     * @param ex         交换机id
+     * @param routingKey 路由key
+     */
+    @Transactional
+    public void publish(XcTask xcTask, String ex, String routingKey) {
+        //查询任务
+        Optional<XcTask> taskOptional = xcTaskRepository.findById(xcTask.getId());
+        if (taskOptional.isPresent()) {
+            XcTask one = taskOptional.get();
+            //String exchange, String routingKey, Object object
+            rabbitTemplate.convertAndSend(ex, routingKey, one);
+            //更新任务时间为当前时间
+            one.setUpdateTime(new Date());
+            xcTaskRepository.save(one);
+        }
+    }
 }
