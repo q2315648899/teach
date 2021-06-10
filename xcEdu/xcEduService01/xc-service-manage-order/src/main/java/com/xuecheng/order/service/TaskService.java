@@ -53,4 +53,13 @@ public class TaskService {
             xcTaskRepository.save(one);
         }
     }
+
+    // 获取任务
+    @Transactional
+    public int getTask(String taskId, int version) {
+        // 通过乐观锁的方式来更新数据库，如果结果大于0说明取到任务
+        int i = xcTaskRepository.updateTaskVersion(taskId, version);
+        return i;
+    }
+
 }
