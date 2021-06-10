@@ -76,7 +76,7 @@ public class RabbitMQConfig {
     如果容器中有多个ConnectionFactory 的bean则参数取名需要与容器中的一个ConnectionFactory 类型bean名相同，否则会报错，因为这时是按名称来查找bean的。
     1：复杂类型可以通过@Qualifier(value=“XXX”)限定;
     2：对于普通类型使用@Value(XXX)指定;
-    @Qualifier和*@Value中的参数值都对应@/
+    @Qualifier和@Value中的参数值都对应@Bean中的参数值*/
     /**
      * 绑定队列到交换机 .
      *

@@ -1,13 +1,21 @@
 package com.xuecheng.order.mq;
 
+import com.xuecheng.framework.domain.task.XcTask;
+import com.xuecheng.order.service.TaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+
 /**
  * //@Component注释默认是单例的
- *
+ * <p>
  * Create by wong on 2021/6/10
  */
 @Component
@@ -15,13 +23,28 @@ public class ChooseCourseTask {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ChooseCourseTask.class);
 
+    @Autowired
+    TaskService taskService;
+
+    // 添加选课信息定时任务
+    @Scheduled(cron = "0/3 * * * * *")
+    public void sendChoosecourseTask() {
+        //取出当前时间1分钟之前的时间
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(new Date());
+        calendar.add(GregorianCalendar.MINUTE, -1);
+        Date time = calendar.getTime();
+        List<XcTask> taskList = taskService.findTaskList(time, 100);
+    }
+
+
     /**
      * 测试基本的定时任务
      */
     // @Scheduled(fixedRate = 5000) //上次任务开始后5秒执行
     // @Scheduled(fixedDelay = 5000) //上次任务结束后5秒执行
     // @Scheduled(initialDelay=3000, fixedRate=5000) //第一次延迟3秒，以后每隔5秒执行一次
-    @Scheduled(cron = "0/3 * * * * *")//（上次任务开始后）每隔3秒执行一次
+//    @Scheduled(cron = "0/3 * * * * *")//（上次任务开始后）每隔3秒执行一次
     public void task1() {
         LOGGER.info("===============测试定时任务1开始===============");
         try {
@@ -35,7 +58,7 @@ public class ChooseCourseTask {
     /**
      * 第二个定时任务，测试串行
      */
-    @Scheduled(cron = "0/3 * * * * *")//（上次任务开始后）每隔3秒执行一次
+//    @Scheduled(cron = "0/3 * * * * *")//（上次任务开始后）每隔3秒执行一次
     public void task2() {
         LOGGER.info("===============测试定时任务2开始===============");
         try {
