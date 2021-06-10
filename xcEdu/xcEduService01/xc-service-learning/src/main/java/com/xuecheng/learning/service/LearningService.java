@@ -49,7 +49,7 @@ public class LearningService {
         return new GetMediaResult(CommonCode.SUCCESS, teachplanMediaPub.getMediaUrl());
     }
 
-    //添加选课
+    //添加选课（添加选课并添加历史任务）
     @Transactional
     public ResponseResult addCourse(String userId, String courseId, String valid, Date startTime, Date endTime, XcTask xcTask) {
         if (StringUtils.isEmpty(courseId)) {
