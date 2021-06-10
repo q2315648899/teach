@@ -1,4 +1,4 @@
-package com.xuecheng.order.config;
+package com.xuecheng.learning.config;
 
 import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 订单服务监听MQ的完成添加选课队列，并且声明添加选课队列
+ * 学习服务监听MQ的添加选课队列，并且声明完成添加选课队列
  */
 @Configuration
 public class RabbitMQConfig {
