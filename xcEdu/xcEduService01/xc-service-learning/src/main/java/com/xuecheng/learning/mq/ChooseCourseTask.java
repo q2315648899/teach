@@ -31,7 +31,7 @@ public class ChooseCourseTask {
     RabbitTemplate rabbitTemplate;
 
     /**
-     * 接收选课任务
+     * 监听添加选课消息队列，接收添加选课的任务
      */
     @RabbitListener(queues = {RabbitMQConfig.XC_LEARNING_ADDCHOOSECOURSE})
     public void receiveChoosecourseTask(XcTask xcTask, Message message, Channel channel) throws IOException {
